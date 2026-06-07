@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -399,6 +400,7 @@
     <div class="nav-item" id="ni-habits" onclick="showPage('habits')"><span class="nav-icon">🔁</span><span>عاداتي</span></div>
     <!-- <div class="nav-item" id="ni-books" onclick="showPage('books')"><span class="nav-icon">📚</span><span>مكتبتي</span></div> -->
     <div class="nav-item" id="ni-quotes" onclick="showPage('quotes')"><span class="nav-icon">✨</span><span>جمل  </span></div>
+    <div class="nav-item" id="ni-pomodoro" onclick="showPage('pomodoro')"><span class="nav-icon">⏱️</span><span>مؤقت البومودورو</span></div>
   </nav>
   <div class="nav-foot">
     <button class="nav-foot-btn" onclick="openAdmin()"><span>⚙️</span><span>إدارة المهام</span></button>
@@ -431,6 +433,81 @@
     </header>
     <div id="dayContent"></div>
   </div>
+
+<!-- POMODORO PAGE -->
+<div id="pg-pomodoro" style="display:none">
+  <div class="pg-head" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <div class="pg-icon" style="background: linear-gradient(135deg, rgba(224,127,154,0.15), rgba(155,119,224,0.15)); color: var(--accent);">⏱️</div>
+      <div class="pg-info">
+        <h2>مؤقت التركيز</h2>
+        <p>أنشئي مساحتكِ الهادئة للإنجاز 🌸</p>
+      </div>
+    </div>
+    <button onclick="openPomoSettingsModal()" style="background: var(--surface2); border: 1px solid var(--border); width: 42px; height: 42px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.2s;" onmouseover="this.style.transform='rotate(45deg)'" onmouseout="this.style.transform='rotate(0deg)'">⚙️</button>
+  </div>
+
+  <div class="quote-hero" style="padding: 3.5rem 1.5rem; margin-bottom: 24px; display: flex; flex-direction: column; align-items: center; background: linear-gradient(180deg, var(--surface2), var(--surface)); border: 1px solid var(--border); box-shadow: 0 20px 40px rgba(0,0,0,0.25);">
+    
+    <div class="pomo-circle-wrapper" style="position: relative; width: 220px; height: 220px; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center;">
+      <svg width="220" height="220" viewBox="0 0 220 220" style="transform: rotate(-90deg); filter: drop-shadow(0 0 15px rgba(224, 127, 154, 0.1));">
+        <circle cx="110" cy="110" r="95" style="fill: none; stroke: var(--surface3); stroke-width: 6; opacity: 0.6;"></circle>
+        <circle id="pomoCircleFill" cx="110" cy="110" r="95" style="fill: none; stroke: var(--accent); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 597; stroke-dashoffset: 0; transition: stroke-dashoffset 0.3s linear, stroke 0.4s, filter 0.3s;"></circle>
+      </svg>
+      <div style="position: absolute; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <div id="pomoTimer" style="font-size: 3.2rem; font-family: 'Tajawal', sans-serif; font-weight: 800; color: var(--text); line-height: 1; letter-spacing: -1px;">25:00</div>
+        <div id="pomoSubMode" style="font-size: 0.8rem; font-weight: 800; color: var(--muted2); margin-top: 8px; background: rgba(255,255,255,0.04); padding: 3px 12px; border-radius: 20px; letter-spacing: 0.5px;">مذاكرة ✨</div>
+      </div>
+    </div>
+
+    <div id="pomoStatus" style="font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 2rem; background: rgba(224,127,154,0.08); padding: 8px 22px; border-radius: 50px; border: 1px solid rgba(224,127,154,0.15); backdrop-filter: blur(5px);">جاهزة للإنجاز يا كتكوتة؟ 🌸</div>
+
+    <div class="q-btns" style="width: 100%; max-width: 280px; display: flex; gap: 12px;">
+      <button class="q-btn primary" id="btnPomoStart" onclick="togglePomo()" style="flex: 3; font-weight: 800; height: 48px; border-radius: 14px; box-shadow: 0 8px 20px rgba(224,127,154,0.2);">ابدئي الجلسة 🎯</button>
+      <button class="q-btn" onclick="resetPomo()" style="flex: 1; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; background: var(--surface3);" title="إعادة تعيين">🔄</button>
+    </div>
+  </div>
+
+  <div class="day-card" style="border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
+    <div class="dc-head" style="padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border);">
+      <div class="dc-title" style="font-size: 1rem; display: flex; align-items: center; gap: 8px; font-weight: 700;"><span>📜</span><span>سجل إنجازاتكِ اليومية</span></div>
+    </div>
+    <div class="tasks-list" id="pomoHistoryList" style="max-height: 250px; overflow-y: auto; padding: 1.25rem;">
+      </div>
+  </div>
+</div>
+
+<div id="pomoSettingsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 4, 10, 0.7); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+  <div style="background: var(--surface); border: 1px solid var(--border2); width: 90%; max-width: 340px; padding: 2rem 1.5rem; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,0,0,0.4); position: relative; transform: scale(0.9); transition: transform 0.3s ease;">
+    
+    <div style="text-align: center; margin-bottom: 1.5rem;">
+      <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 4px;">تخصيص الوقت ⏱️</h3>
+      <p style="font-size: 0.8rem; color: var(--muted);">حددي الأوقات المريحة لكِ</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 2rem;">
+      <div>
+        <label style="display: block; font-size: 0.8rem; color: var(--muted2); margin-bottom: 8px; font-weight: 700; padding-right: 4px;">🎯 وقت المذاكرة والتركيز</label>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="number" class="fc" id="pomoWorkInput" value="25" min="1" max="60" style="text-align: center; padding: 12px; border-radius: 14px; font-weight: 700; font-size: 1.1rem; background: var(--surface2);">
+          <span style="position: absolute; left: 16px; font-size: 0.85rem; color: var(--muted); font-weight: 700; pointer-events: none;">دقيقة</span>
+        </div>
+      </div>
+      <div>
+        <label style="display: block; font-size: 0.8rem; color: var(--muted2); margin-bottom: 8px; font-weight: 700; padding-right: 4px;">🌸 وقت الراحة والاسترخاء</label>
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="number" class="fc" id="pomoBreakInput" value="5" min="1" max="30" style="text-align: center; padding: 12px; border-radius: 14px; font-weight: 700; font-size: 1.1rem; background: var(--surface2);">
+          <span style="position: absolute; left: 16px; font-size: 0.85rem; color: var(--muted); font-weight: 700; pointer-events: none;">دقيقة</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <button class="q-btn primary" onclick="savePomoSettingsModal()" style="flex: 2; height: 44px; border-radius: 12px; font-weight: 700; font-size: 0.9rem;">حفظ التعديلات ✨</button>
+      <button class="q-btn" onclick="closePomoSettingsModal()" style="flex: 1; height: 44px; border-radius: 12px; font-weight: 700; font-size: 0.9rem; background: transparent; border: 1px solid var(--border);">إلغاء</button>
+    </div>
+  </div>
+</div>
 
   <!-- NOTES PAGE -->
   <div id="pg-notes" style="display:none">
@@ -820,7 +897,7 @@ function close1(id){document.getElementById(id).classList.remove('open');}
 function toggleNav(){snd('open');document.getElementById('sideNav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');}
 function closeNav(){document.getElementById('sideNav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');}
 
-const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل'};
+const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️'};
 const fabPages=['tasks','notes','habits'];
 
 function showPage(p){
@@ -930,8 +1007,106 @@ function renderDayCard(){
 }
 
 function togTask(id){
-  if(doneMap[id]){delete doneMap[id];snd('click');}else{doneMap[id]=today();snd('check');}
-  lsS('done',doneMap);renderDayCard();scheduleSave();
+  if(doneMap[id]){
+    delete doneMap[id];
+    snd('click');
+  } else {
+    doneMap[id] = today();
+    snd('check');
+    // تشغيل تأثير القلوب الاحتفالي
+    triggerCelebration();
+  }
+  lsS('done', doneMap);
+  renderDayCard();
+  scheduleSave();
+}
+
+// دالة توليد تأثير القلوب والكلمة اللطيفة
+// دالة توليد تأثير القلوب الاحترافي المتوافق تماماً مع الهاتف والكمبيوتر
+function triggerCelebration() {
+  // تشغيل صوت الإنجاز إذا كان معرفاً في كودك الأساسي
+  if (typeof snd === 'function') snd('check'); 
+
+  // 1. إنشاء الكلمة التشجيعية بحجم مرن ومتوافق مع الهاتف
+  const textPop = document.createElement('div');
+  textPop.style.position = 'fixed';
+  textPop.style.top = '50%';
+  textPop.style.left = '50%';
+  textPop.style.transform = 'translate(-50%, -50%) scale(0)';
+  
+  // استخدام clamp لجعل الخط مرناً جداً (يصغر في الهاتف ويكبر في الشاشات الكبيرة تلقائياً)
+  textPop.style.fontSize = 'clamp(1.8rem, 6vw, 3.5rem)'; 
+  textPop.style.fontWeight = '900';
+  textPop.style.fontFamily = "'Tajawal', sans-serif";
+  textPop.style.background = 'linear-gradient(45deg, #e07f9a, #c8a96e)';
+  textPop.style.webkitBackgroundClip = 'text';
+  textPop.style.webkitTextFillColor = 'transparent';
+  textPop.style.textShadow = '0 10px 25px rgba(224, 127, 154, 0.25)';
+  textPop.style.zIndex = '100000';
+  textPop.style.pointerEvents = 'none';
+  textPop.style.whiteSpace = 'nowrap';
+  textPop.style.width = '90%'; // ضمان عدم خروج النص عن أطراف الهاتف
+  textPop.style.textAlign = 'center';
+  textPop.style.direction = 'rtl';
+  textPop.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  textPop.innerHTML = '💖 شطورة يا كتكوتة! ✨';
+
+  document.body.appendChild(textPop);
+
+  // تشغيل حركة ظهور الكلمة
+  requestAnimationFrame(() => {
+    textPop.style.transform = 'translate(-50%, -50%) scale(1)';
+  });
+
+  // اختفاء الكلمة بنعومة بعد فترة قصيرة
+  setTimeout(() => {
+    textPop.style.opacity = '0';
+    textPop.style.transform = 'translate(-50%, -60%) scale(0.8)';
+    setTimeout(() => textPop.remove(), 400);
+  }, 1600);
+
+
+  // 2. نافورة القلوب (ملء الشاشة بالكامل بـ 35 قلب متناثر)
+  const heartEmojis = ['💖', '💕', '💗', '🌸', '✨', '💝'];
+  const screenWidth = window.innerWidth; // حساب العرض الفعلي بدقة للهاتف
+  
+  for (let i = 0; i < 35; i++) {
+    const heart = document.createElement('div');
+    heart.style.position = 'fixed';
+    
+    // توزيع نقطة الانطلاق على كامل عرض الشاشة بدقة بكسل وليس نسبة مئوية لتفادي التكتل
+    const randomX = Math.random() * screenWidth;
+    heart.style.bottom = '-50px';
+    heart.style.left = randomX + 'px';
+    
+    // أحجام مناسبة ومتنوعة لشاشة الهاتف والكمبيوتر
+    const randomSize = 'clamp(1.2rem, 5vw, 2.8rem)';
+    heart.style.fontSize = randomSize;
+    
+    heart.style.zIndex = '99999';
+    heart.style.pointerEvents = 'none';
+    heart.style.opacity = '1';
+    
+    // سرعات متفاوتة تماماً لجعل المشهد يبدو حيوياً وممتداً
+    const duration = 1.8 + Math.random() * 1.7; 
+    heart.style.transition = `transform ${duration}s cubic-bezier(0.1, 0.7, 0.2, 1), opacity ${duration}s ease-out`;
+    
+    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+    document.body.appendChild(heart);
+    
+    // تشغيل الأنيميشن المتناثر على كامل أبعاد الشاشة
+    requestAnimationFrame(() => {
+      // انحراف جانبي واسع جداً لجعل القلوب تتقاطع وتملأ الشاشة يميناً ويساراً
+      const driftX = (Math.random() - 0.5) * (screenWidth * 0.8); 
+      const rotateDeg = (Math.random() - 0.5) * 720; // دوران مبهج ومضاعف
+      
+      heart.style.transform = `translateY(-115vh) translateX(${driftX}px) rotate(${rotateDeg}deg)`;
+      heart.style.opacity = '0';
+    });
+    
+    // تنظيف المتصفح فوراً بعد انتهاء حركتها
+    setTimeout(() => heart.remove(), duration * 1000);
+  }
 }
 
 function fillSubSel(selId){
@@ -1238,6 +1413,189 @@ function initApp(){
   }
   // else: show login screen (already visible)
 })();
+
+
+
+// متغيرات العداد الاحترافي وحساب محيط الدائرة
+let pomoTimeLeft = 25 * 60;
+let pomoTotalDuration = 25 * 60;
+let pomoTimerId = null;
+let pomoIsWorkMode = true; 
+let pomoWorkDuration = 25;
+let pomoBreakDuration = 5;
+let pomoHistory = ls('pomoHistory', []);
+
+const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 95; // المحيط الدقيق للدائرة نصف قطرها 95 (= 596.9)
+
+// دوال التحكم في الـ Pop-up Modal بتأثير ناعم (Fade & Scale)
+function openPomoSettingsModal() {
+  snd('click');
+  const modal = document.getElementById('pomoSettingsModal');
+  const content = modal.children[0];
+  
+  // ملء الحقول بالقيم الحالية قبل الفتح
+  document.getElementById('pomoWorkInput').value = pomoWorkDuration;
+  document.getElementById('pomoBreakInput').value = pomoBreakDuration;
+  
+  modal.style.display = 'flex';
+  setTimeout(() => {
+    modal.style.opacity = '1';
+    content.style.transform = 'scale(1)';
+  }, 10);
+}
+
+function closePomoSettingsModal() {
+  const modal = document.getElementById('pomoSettingsModal');
+  const content = modal.children[0];
+  
+  modal.style.opacity = '0';
+  content.style.transform = 'scale(0.9)';
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
+}
+
+function savePomoSettingsModal() {
+  snd('ok');
+  pomoWorkDuration = Math.max(1, parseInt(document.getElementById('pomoWorkInput').value) || 25);
+  pomoBreakDuration = Math.max(1, parseInt(document.getElementById('pomoBreakInput').value) || 5);
+  
+  // إذا كان المؤقت لا يعمل حالياً، قم بتحديث الواجهة بالوقت الجديد فوراً
+  if (!pomoTimerId) {
+    resetPomo();
+  } else {
+    toast('✨ سيتم تطبيق الأوقات الجديدة بعد الجلسة الحالية');
+  }
+  closePomoSettingsModal();
+}
+
+// تشغيل وإيقاف العداد مع توهج الدائرة
+function togglePomo() {
+  snd('click');
+  const btn = document.getElementById('btnPomoStart');
+  const fillCircle = document.getElementById('pomoCircleFill');
+  
+  if (pomoTimerId) {
+    clearInterval(pomoTimerId);
+    pomoTimerId = null;
+    btn.textContent = 'استئناف الجلسة 🎯';
+    document.getElementById('pomoStatus').textContent = 'أخدنا بريك ثواني.. المؤقت واقف ☕';
+    fillCircle.style.filter = 'none';
+  } else {
+    btn.textContent = 'إيقاف مؤقت ⏸️';
+    document.getElementById('pomoStatus').textContent = pomoIsWorkMode ? 'دلوقتي وقت التركيز والمذاكرة 📚' : 'خدي نفس واسترخي.. وقت الراحة 🌸';
+    
+    // إضافة توهج مضيء (Glow Effect) للدائرة أثناء العمل
+    fillCircle.style.filter = pomoIsWorkMode ? 'drop-shadow(0 0 8px var(--accent))' : 'drop-shadow(0 0 8px var(--accent3))';
+
+    pomoTimerId = setInterval(() => {
+      pomoTimeLeft--;
+      renderPomoTime();
+      
+      if (pomoTimeLeft <= 0) {
+        clearInterval(pomoTimerId);
+        pomoTimerId = null;
+        fillCircle.style.filter = 'none';
+        pomoSessionCompleted();
+      }
+    }, 1000);
+  }
+}
+
+function resetPomo() {
+  if (pomoTimerId) {
+    clearInterval(pomoTimerId);
+    pomoTimerId = null;
+  }
+  pomoIsWorkMode = true;
+  pomoTotalDuration = pomoWorkDuration * 60;
+  pomoTimeLeft = pomoTotalDuration;
+  
+  document.getElementById('btnPomoStart').textContent = 'ابدئي الجلسة 🎯';
+  document.getElementById('pomoStatus').textContent = 'جاهزة للإنجاز يا كتكوتة؟ 🌸';
+  document.getElementById('pomoSubMode').textContent = 'مذاكرة ✨';
+  
+  const fillCircle = document.getElementById('pomoCircleFill');
+  fillCircle.style.stroke = 'var(--accent)';
+  fillCircle.style.filter = 'none';
+  
+  renderPomoTime();
+}
+
+function renderPomoTime() {
+  const mins = Math.floor(pomoTimeLeft / 60).toString().padStart(2, '0');
+  const secs = (pomoTimeLeft % 60).toString().padStart(2, '0');
+  document.getElementById('pomoTimer').textContent = `${mins}:${secs}`;
+  
+  const fillCircle = document.getElementById('pomoCircleFill');
+  if (fillCircle) {
+    const progress = pomoTimeLeft / pomoTotalDuration;
+    const offset = CIRCLE_CIRCUMFERENCE * (1 - progress);
+    fillCircle.style.strokeDashoffset = offset;
+  }
+}
+
+function pomoSessionCompleted() {
+  if (pomoIsWorkMode) {
+    snd('ok');
+    triggerCelebration(); // يطلق القلوب و التوست "شطورة يكتكوتة"
+    
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
+    pomoHistory.unshift({
+      date: today(),
+      time: timeStr,
+      duration: pomoWorkDuration
+    });
+    lsS('pomoHistory', pomoHistory);
+    renderPomoHistory();
+    
+    // التحويل التلقائي للراحة وتعديل التصميم لـ البنفسجي الهادئ
+    pomoIsWorkMode = false;
+    pomoTotalDuration = pomoBreakDuration * 60;
+    pomoTimeLeft = pomoTotalDuration;
+    document.getElementById('pomoStatus').textContent = 'شاطرة جداً! خلصتي الجلسة، خدي بريك 🥳';
+    document.getElementById('pomoSubMode').textContent = 'راحة ☕';
+    document.getElementById('pomoCircleFill').style.stroke = 'var(--accent3)';
+  } else {
+    snd('quote');
+    toast('🌸 انتهى البريك، مستعدة ترجعي بقوة؟');
+    pomoIsWorkMode = true;
+    pomoTotalDuration = pomoWorkDuration * 60;
+    pomoTimeLeft = pomoTotalDuration;
+    document.getElementById('pomoStatus').textContent = 'مستعدة لجلسة تركيز جديدة؟ 💪';
+    document.getElementById('pomoSubMode').textContent = 'مذاكرة ✨';
+    document.getElementById('pomoCircleFill').style.stroke = 'var(--accent)';
+  }
+  
+  document.getElementById('btnPomoStart').textContent = 'ابدئي العداد 🚀';
+  renderPomoTime();
+}
+
+function renderPomoHistory() {
+  const container = document.getElementById('pomoHistoryList');
+  const todaysSessions = pomoHistory.filter(h => h.date === today());
+  
+  if (!todaysSessions.length) {
+    container.innerHTML = '<div class="empty" style="padding: 1rem;"><div style="font-size:0.82rem; color:var(--muted)">مفيش جلسات مسجلة النهاردة.. تقدري تعمليها! ✨</div></div>';
+    return;
+  }
+  
+  container.innerHTML = todaysSessions.map(h => `
+    <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--surface2); border-radius: 16px; border: 1px solid var(--border); margin-bottom: 8px; animation: slideIn 0.3s ease-out both;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 1.1rem; background: rgba(224,127,154,0.08); width: 34px; height: 34px; display: flex; align-items: center; justify-content: center; border-radius: 10px;">⭐</span>
+        <div>
+          <div style="font-weight: 700; font-size: 0.88rem; color: var(--text);">جلسة تركيز منجزة</div>
+          <div style="font-size: 0.72rem; color: var(--muted); margin-top: 1px;">تحدي وبراعة ✨</div>
+        </div>
+      </div>
+      <div style="font-size: 0.78rem; color: var(--accent2); font-weight: 700; background: rgba(200,169,110,0.08); padding: 5px 12px; border-radius: 10px; border: 1px solid rgba(200,169,110,0.15);">
+        ⏱️ الساعة ${h.time} (${h.duration} د)
+      </div>
+    </div>
+  `).join('');
+}
 </script>
 </body>
 </html>
