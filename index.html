@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -336,6 +335,119 @@
     @keyframes ripple{0%{transform:scale(0);opacity:.8;}100%{transform:scale(4);opacity:0;}}
     @keyframes slideIn{from{transform:translateX(40px);opacity:0;}to{transform:translateX(0);opacity:1;}}
 
+
+
+
+/* ══════════════════════════════════════
+       DINI — TABS
+    ══════════════════════════════════════ */
+    .dini-tabs{display:flex;gap:8px;margin-bottom:1.75rem;background:var(--surface2);border-radius:20px;padding:6px;}
+    .dini-tab{flex:1;padding:11px 6px;border-radius:15px;border:none;background:none;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;font-size:.82rem;font-weight:800;transition:all .25s;display:flex;flex-direction:column;align-items:center;gap:3px;}
+    .dini-tab .dt-ico{font-size:1.3rem;}
+    .dini-tab.active{background:var(--surface);color:var(--accent);box-shadow:0 4px 16px rgba(0,0,0,.15);}
+
+    /* ══════════════════════════════════════
+       QURAN — single ayah viewer
+    ══════════════════════════════════════ */
+    .quran-viewer{border-radius:32px;overflow:hidden;background:var(--surface);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.2);}
+    .qv-header{padding:1.5rem 1.75rem 1.2rem;background:linear-gradient(135deg,rgba(200,169,110,.12),rgba(155,119,224,.08));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .qv-surah-badge{display:flex;align-items:center;gap:10px;}
+    .qv-emoji{width:42px;height:42px;background:rgba(200,169,110,.15);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;}
+    .qv-surah-name{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1rem;color:var(--text);}
+    .qv-ayah-num{font-size:.75rem;color:var(--accent2);background:rgba(200,169,110,.12);padding:4px 12px;border-radius:20px;font-weight:800;border:1px solid rgba(200,169,110,.2);}
+    .qv-counter{font-size:.78rem;color:var(--muted);font-weight:700;background:var(--surface2);padding:5px 12px;border-radius:12px;}
+    .qv-body{padding:2.5rem 2rem;}
+    .qv-ayah-text{font-family:'Tajawal',sans-serif;font-size:1.8rem;font-weight:900;line-height:2.2;text-align:center;color:var(--text);margin-bottom:2rem;padding:1.5rem;background:linear-gradient(135deg,rgba(200,169,110,.06),rgba(155,119,224,.04));border-radius:22px;border:1px solid var(--border);position:relative;}
+    .qv-ayah-text::before{content:'﴾';position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:2.5rem;color:var(--accent2);opacity:.15;font-family:'Tajawal',sans-serif;}
+    .qv-tafseer-box{background:var(--surface2);border-radius:18px;padding:1.25rem 1.5rem;border:1px solid var(--border);position:relative;overflow:hidden;}
+    .qv-tafseer-box::before{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:linear-gradient(180deg,var(--accent2),var(--accent3));}
+    .qv-tafseer-label{font-size:.72rem;font-weight:900;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;margin-bottom:.6rem;display:flex;align-items:center;gap:6px;}
+    .qv-tafseer-text{font-size:.92rem;line-height:1.9;color:var(--muted2);font-weight:500;}
+    .qv-footer{padding:1.5rem 2rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .qv-nav-btn{flex:1;padding:14px;border-radius:18px;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Cairo',sans-serif;font-weight:800;font-size:.9rem;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:8px;}
+    .qv-nav-btn:hover{border-color:var(--accent2);background:rgba(200,169,110,.08);color:var(--accent2);}
+    .qv-next-btn{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border-color:transparent;box-shadow:0 8px 25px rgba(224,127,154,.35);}
+    .qv-next-btn:hover{transform:translateY(-2px);box-shadow:0 12px 35px rgba(224,127,154,.5);border-color:transparent;color:#fff;}
+    .qv-dots{display:flex;gap:6px;justify-content:center;padding:.75rem 0 1.25rem;}
+    .qv-dot{width:7px;height:7px;border-radius:50%;background:var(--border2);transition:all .3s;cursor:pointer;}
+    .qv-dot.active{background:var(--accent);transform:scale(1.3);}
+    @keyframes ayahSlide{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    .ayah-anim{animation:ayahSlide .4s cubic-bezier(.34,1.2,.64,1);}
+
+    /* ══════════════════════════════════════
+       FEELING — dropdown style
+    ══════════════════════════════════════ */
+    /* .feeling-select-wrap{position:relative;margin-bottom:1.5rem;} */
+    .feeling-select-wrap{position:relative;margin-bottom:1.5rem;z-index:10;}
+    .feeling-select-btn{width:100%;padding:18px 22px;background:var(--surface);border:1.5px solid var(--border);border-radius:22px;color:var(--muted2);font-family:'Cairo',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all .3s;}
+    .feeling-select-btn:hover,.feeling-select-btn.open{border-color:var(--accent);box-shadow:0 0 0 4px rgba(224,127,154,.08);}
+    .feeling-select-btn .fsb-left{display:flex;align-items:center;gap:12px;}
+    .feeling-select-btn .fsb-placeholder{color:var(--muted);}
+    .feeling-arrow{transition:transform .3s;font-size:.8rem;color:var(--muted);}
+    .feeling-select-btn.open .feeling-arrow{transform:rotate(180deg);}
+    /* .feeling-dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--surface);border:1.5px solid var(--border);border-radius:22px;overflow:hidden;z-index:50;box-shadow:0 20px 60px rgba(0,0,0,.25);max-height:0;opacity:0;pointer-events:none;transition:max-height .35s cubic-bezier(.34,1.2,.64,1),opacity .25s;} */
+    /* .feeling-dropdown.open{max-height:400px;opacity:1;pointer-events:all;} */
+    .feeling-dropdown{position:static;background:var(--surface);border:1.5px solid var(--border);border-radius:22px;overflow:hidden;z-index:50;box-shadow:0 12px 40px rgba(0,0,0,.2);max-height:0;opacity:0;pointer-events:none;transition:max-height .35s cubic-bezier(.34,1.2,.64,1),opacity .25s;margin-top:8px;}
+    .feeling-dropdown.open{max-height:400px;opacity:1;pointer-events:all;}
+    .feeling-option{padding:16px 20px;cursor:pointer;font-family:'Cairo',sans-serif;font-weight:700;font-size:.95rem;color:var(--muted2);transition:all .2s;display:flex;align-items:center;gap:14px;border-bottom:1px solid var(--border);}
+    .feeling-option:last-child{border-bottom:none;}
+    .feeling-option:hover{background:var(--surface2);color:var(--text);}
+    .feeling-option.selected{color:var(--accent);background:rgba(224,127,154,.07);}
+    .fo-color-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .feeling-result-card{background:var(--surface);border-radius:28px;overflow:hidden;border:1px solid var(--border);box-shadow:0 16px 50px rgba(0,0,0,.18);animation:ayahSlide .4s cubic-bezier(.34,1.2,.64,1);}
+    .frc-header{padding:2rem;text-align:center;position:relative;overflow:hidden;}
+    .frc-header::before{content:'';position:absolute;inset:0;opacity:.06;}
+    .frc-ayah{font-family:'Tajawal',sans-serif;font-size:1.6rem;font-weight:900;line-height:2.1;margin-bottom:1rem;position:relative;z-index:1;}
+    .frc-surah{font-size:.82rem;color:var(--muted2);font-weight:700;position:relative;z-index:1;}
+    .frc-body{padding:1.5rem 2rem 2rem;}
+    .frc-comfort{font-size:.95rem;line-height:1.9;color:var(--muted2);padding:1.2rem 1.5rem;background:var(--surface2);border-radius:18px;border:1px solid var(--border);}
+
+    /* ══════════════════════════════════════
+       ATHKAR — one at a time
+    ══════════════════════════════════════ */
+    .athkar-type-tabs{display:flex;gap:8px;margin-bottom:1.75rem;}
+    .att{flex:1;padding:14px;border-radius:20px;border:2px solid var(--border);background:var(--surface);cursor:pointer;font-family:'Cairo',sans-serif;font-weight:800;font-size:.9rem;color:var(--muted);transition:all .25s;text-align:center;}
+    .att.active{background:linear-gradient(135deg,var(--accent),var(--accent3));color:#fff;border-color:transparent;box-shadow:0 8px 25px rgba(224,127,154,.35);}
+    .athkar-overall{display:flex;align-items:center;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1rem 1.5rem;margin-bottom:1.5rem;}
+    .aop-wrap{flex:1;height:6px;background:var(--surface3);border-radius:10px;overflow:hidden;}
+    .aop-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:10px;transition:width .6s ease;}
+    .aop-txt{font-size:.8rem;font-weight:900;color:var(--accent);white-space:nowrap;}
+    .zekr-viewer{border-radius:32px;overflow:hidden;background:var(--surface);border:1px solid var(--border);box-shadow:0 20px 60px rgba(0,0,0,.2);}
+    .zv-header{padding:1.25rem 1.75rem;background:linear-gradient(135deg,rgba(155,119,224,.1),rgba(224,127,154,.07));border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+    .zv-step{font-size:.8rem;font-weight:800;color:var(--accent3);background:rgba(155,119,224,.12);padding:5px 14px;border-radius:12px;}
+    .zv-virtue-badge{font-size:.75rem;color:var(--muted);font-weight:700;background:var(--surface2);padding:5px 12px;border-radius:12px;border:1px solid var(--border);max-width:55%;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .zv-body{padding:2.5rem 2rem;text-align:center;}
+    .zv-text{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:800;line-height:2.1;color:var(--text);margin-bottom:2rem;}
+    .zv-tap-area{display:flex;flex-direction:column;align-items:center;gap:16px;}
+    .zv-ring{position:relative;width:130px;height:130px;cursor:pointer;margin:0 auto;}
+    .zv-ring svg{transform:rotate(-90deg);}
+    .zv-ring-bg{fill:none;stroke:var(--surface3);stroke-width:8;}
+    .zv-ring-fill{fill:none;stroke:var(--accent3);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .4s ease,stroke .3s;}
+    .zv-ring-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+    .zv-count-num{font-family:'Tajawal',sans-serif;font-size:2.4rem;font-weight:900;color:var(--accent3);line-height:1;}
+    .zv-count-sub{font-size:.7rem;color:var(--muted);font-weight:700;margin-top:2px;}
+    .zv-tap-btn{padding:15px 40px;border-radius:50px;background:linear-gradient(135deg,var(--accent3),var(--accent));color:#fff;border:none;font-family:'Cairo',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;transition:all .25s;box-shadow:0 8px 28px rgba(155,119,224,.4);letter-spacing:.5px;}
+    .zv-tap-btn:active{transform:scale(.95);}
+    .zv-tap-btn:disabled{opacity:.35;cursor:not-allowed;transform:none;box-shadow:none;}
+    .zv-virtue{font-size:.82rem;color:var(--muted2);line-height:1.75;margin-top:1.5rem;padding:1rem 1.25rem;background:var(--surface2);border-radius:16px;border:1px solid var(--border);text-align:center;}
+    .zv-done-state{text-align:center;padding:2rem;animation:ayahSlide .4s ease;}
+    .zv-done-ico{font-size:3.5rem;margin-bottom:.75rem;}
+    .zv-done-txt{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;color:var(--success);margin-bottom:.5rem;}
+    .zv-done-sub{font-size:.85rem;color:var(--muted);}
+    .athkar-progress{margin-bottom:1.5rem;background:var(--surface2);border-radius:16px;padding:1rem 1.5rem;display:flex;align-items:center;gap:14px;border:1px solid var(--border);}
+    .ap-bar-wrap{flex:1;height:8px;background:var(--surface3);border-radius:10px;overflow:hidden;}
+    .ap-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:10px;transition:width .5s ease;}
+    .ap-txt{font-size:.8rem;font-weight:800;color:var(--accent);white-space:nowrap;}
+
+
+    .feeling-native-select{width:100%;padding:18px 22px;background:var(--surface);border:1.5px solid var(--border);border-radius:22px;color:var(--text);font-family:'Cairo',sans-serif;font-weight:800;font-size:1rem;cursor:pointer;outline:none;appearance:none;-webkit-appearance:none;margin-bottom:1.5rem;transition:border-color .3s;}
+    .feeling-native-select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(224,127,154,.1);}
+    .feeling-native-select option{background:var(--surface);color:var(--text);font-family:'Cairo',sans-serif;padding:12px;}
+
+
+
+
+
     ::-webkit-scrollbar{width:4px;}
     ::-webkit-scrollbar-track{background:transparent;}
     ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px;}
@@ -400,6 +512,7 @@
     <div class="nav-item" id="ni-habits" onclick="showPage('habits')"><span class="nav-icon">🔁</span><span>عاداتي</span></div>
     <!-- <div class="nav-item" id="ni-books" onclick="showPage('books')"><span class="nav-icon">📚</span><span>مكتبتي</span></div> -->
     <div class="nav-item" id="ni-quotes" onclick="showPage('quotes')"><span class="nav-icon">✨</span><span>جمل  </span></div>
+    <div class="nav-item" id="ni-dini" onclick="showPage('dini')"><span class="nav-icon">🕌</span><span>ديني</span></div>
     <div class="nav-item" id="ni-pomodoro" onclick="showPage('pomodoro')"><span class="nav-icon">⏱️</span><span>مؤقت البومودورو</span></div>
   </nav>
   <div class="nav-foot">
@@ -423,6 +536,61 @@
     </div>
     <button class="icon-btn" onclick="playClick();toggleTheme()">🌓</button>
   </div>
+
+
+
+
+
+<!-- DINI PAGE -->
+  <div id="pg-dini" style="display:none">
+    <div class="pg-head">
+      <div class="pg-icon" style="background:linear-gradient(135deg,rgba(200,169,110,.18),rgba(155,119,224,.12));font-size:28px">🕌</div>
+      <div class="pg-info"><h2>الركن الديني</h2><p>قرآن • أذكار • اطمئنان 🤲</p></div>
+    </div>
+    <div class="dini-tabs">
+      <button class="dini-tab active" id="dt-quran" onclick="showDiniTab('quran')">
+        <span class="dt-ico">📖</span><span>آيات</span>
+      </button>
+      <button class="dini-tab" id="dt-feeling" onclick="showDiniTab('feeling')">
+        <span class="dt-ico">💭</span><span>شعورك؟</span>
+      </button>
+      <!-- <button class="dini-tab" id="dt-athkar" onclick="showDiniTab('athkar')">
+        <span class="dt-ico">🤲</span><span>أذكار</span>
+      </button> -->
+    </div>
+
+    <!-- Quran Tab -->
+    <div id="dini-quran">
+      <div id="quranViewer"></div>
+    </div>
+
+    <!-- Feeling Tab -->
+    <div id="dini-feeling" style="display:none">
+      <div style="text-align:center;margin-bottom:1.75rem;">
+        <div style="font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:900;margin-bottom:.4rem;">كيف حالكِ دلوقتي؟ 💭</div>
+        <div style="font-size:.83rem;color:var(--muted)">اختاري من القائمة وهيجيلك ما يطمن قلبك</div>
+      </div>
+      <select class="feeling-native-select" id="feelingNativeSelect" onchange="selectFeeling(this.value)">
+        <option value="" disabled selected>🌸 اختاري شعورك...</option>
+      </select>
+      <div id="feelingResult"></div>
+    </div>
+
+    <!-- Athkar Tab -->
+    <div id="dini-athkar" style="display:none">
+      <div class="athkar-type-tabs">
+        <button class="att active" id="att-morning" onclick="showAthkarType('morning')">🌅 أذكار الصباح</button>
+        <button class="att" id="att-evening" onclick="showAthkarType('evening')">🌙 أذكار المساء</button>
+      </div>
+      <div class="athkar-overall" id="athkarOverall" style="display:none">
+        <span style="font-size:1.2rem">🤲</span>
+        <div class="aop-wrap"><div class="aop-bar" id="aopBar" style="width:0%"></div></div>
+        <span class="aop-txt" id="aopTxt">0 / 0</span>
+      </div>
+      <div id="zekrViewer"></div>
+    </div>
+  </div>
+
 
   <!-- TASKS PAGE -->
   <div id="pg-tasks">
@@ -897,7 +1065,7 @@ function close1(id){document.getElementById(id).classList.remove('open');}
 function toggleNav(){snd('open');document.getElementById('sideNav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');}
 function closeNav(){document.getElementById('sideNav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');}
 
-const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️'};
+const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️',dini:'ديني 🕌'};
 const fabPages=['tasks','notes','habits'];
 
 function showPage(p){
@@ -914,6 +1082,7 @@ function showPage(p){
   if(p==='habits')renderHabits();
   if(p==='books')renderBooks();
   if(p==='quotes')renderQuotes();
+  if(p==='dini')initDiniPage();
 }
 
 function onFab(){
@@ -1363,7 +1532,7 @@ function doReset(){
 // ═══════════════════════════════════════════════════════
 function toggleTheme(){
   snd('click');
-  isLight=!isLight;document.body.classList.toggle('light',isLight);lsS('isLight',isLight);
+   isLight=!isLight;document.body.classList.toggle('light',isLight);lsS('isLight',isLight);lsS('themeTouched',true);
   document.getElementById('themeIco').textContent=isLight?'☀️':'🌙';
   document.getElementById('themeTxt').textContent=isLight?'الوضع الداكن':'الوضع الفاتح';
 }
@@ -1379,6 +1548,10 @@ function initApp(){
     if(CONTENT.welcomeName) document.querySelector('.accent-w').textContent = CONTENT.welcomeName;
   }
 
+  if(typeof CONTENT!=='undefined' && CONTENT.defaultTheme && !ls('themeTouched',false)){
+    isLight = CONTENT.defaultTheme === 'light';
+    lsS('isLight', isLight);
+  }
   document.body.classList.toggle('light',isLight);
   document.getElementById('themeIco').textContent=isLight?'☀️':'🌙';
   document.getElementById('themeTxt').textContent=isLight?'الوضع الداكن':'الوضع الفاتح';
@@ -1521,6 +1694,243 @@ function resetPomo() {
   
   renderPomoTime();
 }
+
+
+// ═══════════════════════════════════════════════════════
+// DINI — القسم الديني
+// ═══════════════════════════════════════════════════════
+const QURAN_VERSES  = (typeof CONTENT!=='undefined'&&CONTENT.quranVerses)   ? CONTENT.quranVerses   : [];
+const FEELING_DATA  = (typeof CONTENT!=='undefined'&&CONTENT.feelingVerses) ? CONTENT.feelingVerses : {};
+const ATHKAR_DATA   = (typeof CONTENT!=='undefined'&&CONTENT.athkar)        ? CONTENT.athkar        : {morning:[],evening:[]};
+
+let currentAyahIdx      = 0;
+let currentAthkarType   = 'morning';
+let currentZekrIdx      = 0;
+let athkarCounts        = {};
+const CIRC = 2 * Math.PI * 52; // circumference for r=52
+
+function initDiniPage() {
+  renderQuranViewer();
+  renderFeelingDropdown();
+  renderZekrViewer('morning');
+}
+
+/* ─── QURAN ─── */
+function renderQuranViewer() {
+  const el = document.getElementById('quranViewer');
+  if (!el || !QURAN_VERSES.length) {
+    el.innerHTML = '<div class="empty"><span class="empty-em">📖</span><p>أضيفي آيات من content.js</p></div>';
+    return;
+  }
+  renderAyah(currentAyahIdx, false);
+}
+
+function renderAyah(idx, animate) {
+  currentAyahIdx = idx;
+  const v   = QURAN_VERSES[idx];
+  const tot = QURAN_VERSES.length;
+  const el  = document.getElementById('quranViewer');
+  const dots = Array.from({length: tot}, (_, i) =>
+    `<span class="qv-dot${i===idx?' active':''}" onclick="renderAyah(${i},true)"></span>`
+  ).join('');
+
+  el.innerHTML = `
+    <div class="quran-viewer">
+
+      <div class="qv-body${animate?' ayah-anim':''}">
+        <div class="qv-ayah-text">${v.ayah}</div>
+        <div class="qv-tafseer-box">
+          <div class="qv-tafseer-label"> التفسير</div>
+          <div class="qv-tafseer-text">${v.tafseer}</div>
+        </div>
+      </div>
+
+      <div class="qv-footer">
+        <button class="qv-nav-btn qv-next-btn" onclick="renderAyah(${(idx+1)%tot},true)">
+          ايـة اخـرى 
+        </button>
+      </div>
+    </div>`;
+}
+
+/* ─── FEELING ─── */
+function renderFeelingDropdown() {
+  const sel = document.getElementById('feelingNativeSelect');
+  if (!sel) return;
+  sel.innerHTML = '<option value="" disabled selected>🌸 اختاري شعورك...</option>' +
+    Object.entries(FEELING_DATA).map(([key, val]) =>
+      `<option value="${key}">${val.label}</option>`
+    ).join('');
+}
+
+function selectFeeling(key) {
+  if(!key) return;
+  snd('click');
+  const data = FEELING_DATA[key];
+  // pick random verse
+  const v = data.verses[Math.floor(Math.random()*data.verses.length)];
+  document.getElementById('feelingResult').innerHTML = `
+    <div class="feeling-result-card">
+      <div class="frc-header" style="background:linear-gradient(135deg,${data.color}18,${data.color}08)">
+        <div class="frc-ayah">${v.ayah}</div>
+        <div class="frc-surah">${v.surah}</div>
+      </div>
+      <div class="frc-body">
+        <div class="frc-comfort">${v.comfort}</div>
+      </div>
+    </div>`;
+}
+
+// close dropdown when clicking outside
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.feeling-select-wrap')) {
+    const btn = document.getElementById('feelingSelectBtn');
+    const dd  = document.getElementById('feelingDropdown');
+    if(btn) btn.classList.remove('open');
+    if(dd)  dd.classList.remove('open');
+  }
+});
+
+/* ─── ATHKAR ─── */
+function showAthkarType(type) {
+  currentAthkarType = type;
+  currentZekrIdx    = 0;
+  athkarCounts      = {};
+  document.getElementById('att-morning').classList.toggle('active', type==='morning');
+  document.getElementById('att-evening').classList.toggle('active', type==='evening');
+  renderZekrViewer(type);
+}
+
+function renderZekrViewer(type) {
+  const items = ATHKAR_DATA[type] || [];
+  const el    = document.getElementById('zekrViewer');
+  const ov    = document.getElementById('athkarOverall');
+  if (!el) return;
+  items.forEach((_,i)=>{ if(athkarCounts[i]===undefined) athkarCounts[i]=0; });
+  updateOverallBar(items);
+  if(ov) ov.style.display = items.length ? 'flex' : 'none';
+  renderSingleZekr(currentZekrIdx, items);
+}
+
+function renderSingleZekr(idx, items) {
+  const el = document.getElementById('zekrViewer');
+  if(!el) return;
+
+  // skip already-done zekrs to find first undone
+  if(!items || !items.length){ el.innerHTML=''; return; }
+
+  const allDone = items.every((_,i)=> athkarCounts[i] >= items[i].repeat);
+  if(allDone) {
+    el.innerHTML = `
+      <div class="zekr-viewer">
+        <div class="zv-done-state">
+          <div class="zv-done-ico">🌙✨</div>
+          <div class="zv-done-txt">ما شاء الله! أكملتِ جميع الأذكار</div>
+          <div class="zv-done-sub">جزاكِ الله خيراً 🤍</div>
+        </div>
+      </div>`;
+    return;
+  }
+
+  // if current is done, move to next undone
+  while(idx < items.length && athkarCounts[idx] >= items[idx].repeat) idx++;
+  if(idx >= items.length) idx = items.findIndex((_,i)=> athkarCounts[i] < items[i].repeat);
+  currentZekrIdx = idx;
+
+  const z        = items[idx];
+  const done     = athkarCounts[idx] || 0;
+  const remaining = z.repeat - done;
+  const progress  = done / z.repeat;
+  const offset    = CIRC * (1 - progress);
+  const doneCount = items.filter((_,i)=> athkarCounts[i] >= items[i].repeat).length;
+
+  el.innerHTML = `
+    <div class="zekr-viewer">
+      <div class="zv-header">
+        <div class="zv-step">ذكر ${doneCount+1} / ${items.length}</div>
+        <div class="zv-virtue-badge" title="${z.virtue}">✨ ${z.virtue}</div>
+      </div>
+      <div class="zv-body ayah-anim">
+        <div class="zv-text">${z.text}</div>
+        <div class="zv-tap-area">
+          <div class="zv-ring" onclick="tapZekr()">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <circle class="zv-ring-bg" cx="65" cy="65" r="52"/>
+              <circle class="zv-ring-fill" cx="65" cy="65" r="52"
+                stroke-dasharray="${CIRC.toFixed(1)}"
+                stroke-dashoffset="${offset.toFixed(1)}"
+                id="zekrRingFill"/>
+            </svg>
+            <div class="zv-ring-inner">
+              <div class="zv-count-num" id="zekrNum">${remaining}</div>
+              <div class="zv-count-sub">متبقي</div>
+            </div>
+          </div>
+          <button class="zv-tap-btn" onclick="tapZekr()" id="zekrTapBtn">
+            اضغطي 🤲
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function tapZekr() {
+  const items = ATHKAR_DATA[currentAthkarType] || [];
+  const z     = items[currentZekrIdx];
+  if(!z || athkarCounts[currentZekrIdx] >= z.repeat) return;
+
+  snd('click');
+  athkarCounts[currentZekrIdx]++;
+  const done      = athkarCounts[currentZekrIdx];
+  const remaining = z.repeat - done;
+  const progress  = done / z.repeat;
+  const offset    = CIRC * (1 - progress);
+
+  // update ring
+  const fill = document.getElementById('zekrRingFill');
+  const num  = document.getElementById('zekrNum');
+  if(fill) fill.style.strokeDashoffset = offset.toFixed(1);
+  if(num)  num.textContent = remaining > 0 ? remaining : '✓';
+
+  updateOverallBar(items);
+
+  if(remaining <= 0) {
+    snd('ok');
+    setTimeout(()=>{
+      const allDone = items.every((_,i)=> athkarCounts[i] >= items[i].repeat);
+      if(allDone){
+        renderSingleZekr(0, items);
+        toast('🤲 ما شاء الله! أكملتِ جميع الأذكار');
+        triggerCelebration();
+      } else {
+        currentZekrIdx++;
+        renderSingleZekr(currentZekrIdx, items);
+      }
+    }, 600);
+  }
+}
+
+function updateOverallBar(items) {
+  const done  = items.filter((_,i)=> athkarCounts[i] >= items[i].repeat).length;
+  const total = items.length;
+  const pct   = total ? Math.round(done/total*100) : 0;
+  const bar   = document.getElementById('aopBar');
+  const txt   = document.getElementById('aopTxt');
+  if(bar) bar.style.width = pct+'%';
+  if(txt) txt.textContent = `${done} / ${total}`;
+}
+
+/* ─── TABS ─── */
+function showDiniTab(tab) {
+  snd('click');
+  ['quran','feeling','athkar'].forEach(t=>{
+    document.getElementById('dini-'+t).style.display = t===tab ? 'block' : 'none';
+    document.getElementById('dt-'+t).classList.toggle('active', t===tab);
+  });
+}
+
+
+
 
 function renderPomoTime() {
   const mins = Math.floor(pomoTimeLeft / 60).toString().padStart(2, '0');
