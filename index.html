@@ -579,6 +579,255 @@
     }
     .fadfada-del-btn:hover { color: var(--danger); background: rgba(248,113,113,.1); }
 
+    /* Moments (لحظات حلوة) Page & Elements */
+    .moments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 1.5rem;
+    }
+    .moment-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: transform var(--r), border-color var(--r), box-shadow var(--r);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp .4s ease both;
+    }
+    .moment-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .moment-img-container {
+      width: 100%;
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+    }
+    .moment-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .moment-card:hover .moment-img-container img {
+      transform: scale(1.05);
+    }
+    .moment-card-title {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+    .moment-card-desc {
+      font-size: 0.88rem;
+      color: var(--muted2);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .moment-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+    .moment-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .moment-tag {
+      background: rgba(224,127,154,0.08);
+      border: 1px solid rgba(224,127,154,0.2);
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .moment-has-audio {
+      color: var(--accent3);
+      font-size: 1rem;
+    }
+
+    /* Modal upload & edit preview styles */
+    .mo-previews {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .mo-preview-item {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border2);
+    }
+    .mo-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .mo-preview-del {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      width: 18px;
+      height: 18px;
+      background: rgba(248,113,113,0.9);
+      border: none;
+      color: white;
+      border-radius: 50%;
+      font-size: 0.65rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mo-links-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .mo-link-item {
+      background: var(--surface3);
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mo-link-item button {
+      background: none;
+      border: none;
+      color: var(--danger);
+      cursor: pointer;
+      font-weight: bold;
+      margin-right: 4px;
+    }
+
+    /* Audio styles */
+    .mo-audio-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 14px;
+      margin-top: 10px;
+    }
+    .mo-audio-btn {
+      background: var(--accent);
+      border: none;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+    }
+    
+    /* View moment slider style */
+    .mo-gallery {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 8px;
+    }
+    .mo-gallery::-webkit-scrollbar {
+      height: 6px;
+    }
+    .mo-gallery::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 3px;
+    }
+    .mo-gallery-img {
+      flex: 0 0 100%;
+      max-height: 300px;
+      border-radius: 16px;
+      overflow: hidden;
+      scroll-snap-align: start;
+      background: var(--surface2);
+    }
+    .mo-gallery-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      cursor: zoom-in;
+    }
+
+    /* Sync Status Pill */
+    .sync-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 800;
+      transition: all 0.3s ease;
+      border: 1px solid var(--border);
+      background: var(--surface2);
+      color: var(--text);
+    }
+    .sync-status-pill.online {
+      border-color: rgba(74, 222, 128, 0.3);
+      color: var(--success);
+      background: rgba(74, 222, 128, 0.08);
+    }
+    .sync-status-pill.offline {
+      border-color: rgba(248, 113, 113, 0.3);
+      color: var(--danger);
+      background: rgba(248, 113, 113, 0.08);
+    }
+    .sync-status-pill.syncing {
+      border-color: rgba(200, 169, 110, 0.3);
+      color: var(--accent2);
+      background: rgba(200, 169, 110, 0.08);
+    }
+    .sync-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .sync-status-pill.syncing .sync-status-dot {
+      animation: syncFlash 1s ease-in-out infinite;
+    }
+    @keyframes syncFlash {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
   </style>
 </head>
 <body>
@@ -626,14 +875,19 @@
     <div class="nav-sub">عالمكِ الخاص 🌸 <span class="sync-dot" id="syncDot" title="حالة التزامن"></span></div>
   </div>
   <nav class="nav-items">
-    <div class="nav-item active" id="ni-tasks" onclick="showPage('tasks')"><span class="nav-icon">📑</span><span>مهامي</span></div>
-    <div class="nav-item" id="ni-fadfadat" onclick="showPage('fadfadat')"><span class="nav-icon">💬</span><span>الفضفضات</span></div>
+    <div class="nav-item active" id="ni-tasks" onclick="showPage('tasks')"><span class="nav-icon">📑</span><span>تاسكاتي</span></div>
     <div class="nav-item" id="ni-notes" onclick="showPage('notes')"><span class="nav-icon">📝</span><span>ملاحظاتي</span></div>
     <div class="nav-item" id="ni-habits" onclick="showPage('habits')"><span class="nav-icon">🔁</span><span>عاداتي</span></div>
+    <div class="nav-item" id="ni-pomodoro" onclick="showPage('pomodoro')"><span class="nav-icon">⏱️</span><span>مؤقت البومودورو</span></div>
+    <div class="nav-item" id="ni-dini" onclick="showPage('dini')"><span class="nav-icon">🕌</span><span>ديني</span></div>
+    <div class="nav-item" id="ni-fadfadat" onclick="showPage('fadfadat')"><span class="nav-icon">💬</span><span>الفضفضات</span></div>
+    <div class="nav-item" id="ni-moments" onclick="showPage('moments')"><span class="nav-icon">🌸</span><span>لحظات حلوة</span></div>
+
+
     <!-- <div class="nav-item" id="ni-books" onclick="showPage('books')"><span class="nav-icon">📚</span><span>مكتبتي</span></div> -->
     <div class="nav-item" id="ni-quotes" onclick="showPage('quotes')"><span class="nav-icon">✨</span><span>جمل  </span></div>
-    <div class="nav-item" id="ni-dini" onclick="showPage('dini')"><span class="nav-icon">🕌</span><span>ديني</span></div>
-    <div class="nav-item" id="ni-pomodoro" onclick="showPage('pomodoro')"><span class="nav-icon">⏱️</span><span>مؤقت البومودورو</span></div>
+
+
   </nav>
   <div class="nav-foot">
     <button class="nav-foot-btn" onclick="openAdmin()"><span>⚙️</span><span>إدارة المهام</span></button>
@@ -652,9 +906,15 @@
           <line x1="0" y1="2" x2="20" y2="2"/><line x1="0" y1="8" x2="20" y2="8"/><line x1="0" y1="14" x2="20" y2="14"/>
         </svg>
       </button>
-      <span class="page-label" id="pageLabel">مهامي</span>
+      <span class="page-label" id="pageLabel">تاسكاتي</span>
     </div>
-    <button class="icon-btn" onclick="playClick();toggleTheme()">🌓</button>
+    <div style="display:flex;align-items:center;gap:12px">
+      <div id="syncStatusPill" class="sync-status-pill online" title="حالة مزامنة البيانات مع الأجهزة الأخرى">
+        <span class="sync-status-dot"></span>
+        <span id="syncStatusText" class="sync-status-text">متصل ومزامن ☁️</span>
+      </div>
+      <button class="icon-btn" onclick="playClick();toggleTheme()">🌓</button>
+    </div>
   </div>
 
 
@@ -829,6 +1089,15 @@
     <div id="fadfadatList"></div>
   </div>
 
+  <!-- MOMENTS PAGE -->
+  <div id="pg-moments" style="display:none">
+    <div class="pg-head">
+      <div class="pg-icon" style="background:linear-gradient(135deg,rgba(251,191,36,.15),rgba(236,72,153,.15))">🌸</div>
+      <div class="pg-info"><h2>لحظات حلوة في حياتك</h2><p>وثّقي لحظاتكِ السعيدة بالصور، الكلمات، الروابط والأصوات ✨</p></div>
+    </div>
+    <div class="moments-grid" id="momentsGrid"></div>
+  </div>
+
 
 
 
@@ -934,6 +1203,79 @@
   </div>
 </div>
 
+<!-- Add Moment -->
+<div class="modal-overlay" id="mAddMoment">
+  <div class="modal" style="max-width:550px">
+    <div class="modal-hd">
+      <div class="modal-ttl" id="moModalTtl">🌸 توثيق لحظة حلوة جديدة</div>
+      <button class="m-close" onclick="close1('mAddMoment')">✕</button>
+    </div>
+    <div class="modal-bd">
+      <div class="form-g">
+        <label>عنوان اللحظة</label>
+        <input type="text" class="fc" id="moTitle" placeholder="مثال: رحلة النيل، نجاح الامتحان...">
+      </div>
+      <div class="form-g">
+        <label>التفاصيل والكلام الحلو</label>
+        <textarea class="fc" id="moText" placeholder="اكتبي مشاعرك وذكرياتك الجميلة هنا..." style="min-height:350px"></textarea>
+      </div>
+      
+      <!-- الصور -->
+      <div class="form-g">
+        <label>الصور السعيدة</label>
+        <div style="display:flex;gap:10px;align-items:center">
+          <input type="file" id="moImagesInput" multiple accept="image/*" style="display:none" onchange="handleMoImagesSelect(this)">
+          <button class="q-btn" onclick="document.getElementById('moImagesInput').click()" style="padding:10px 16px;border-radius:12px;font-size:0.85rem">📸 اختيار صور</button>
+          <span style="font-size:0.75rem;color:var(--muted)">سيتم ضغط الصور تلقائياً للحفاظ على المساحة</span>
+        </div>
+        <div class="mo-previews" id="moPreviews"></div>
+      </div>
+
+      <!-- تسجيل الصوت -->
+      <div class="form-g">
+        <label>تسجيل صوتي للحظة (رسالة صوتية لنفسك 🎙️)</label>
+        <div class="mo-audio-row">
+          <button class="mo-audio-btn" id="moMicBtn" onclick="toggleMoMic()">🎙️</button>
+          <span id="moMicTxt" style="font-size:0.85rem;font-weight:700">سجلي كلامك بصوتك</span>
+        </div>
+      </div>
+
+      <button class="btn btn-p" onclick="saveMoment()" style="margin-top:1.5rem">حفظ اللحظة الحلوة 🌸</button>
+    </div>
+  </div>
+</div>
+
+<!-- View Moment -->
+<div class="modal-overlay" id="mViewMoment">
+  <div class="modal" style="max-width:550px">
+    <div class="modal-hd">
+      <div class="modal-ttl" id="vMoTitle" style="font-weight:800"></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="editViewMoment()" style="background:rgba(200,169,110,.1);border:1px solid rgba(200,169,110,.3);color:var(--accent2);border-radius:12px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:800">✏️ تعديل</button>
+        <button onclick="deleteViewMoment()" style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);border-radius:12px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:800">🗑 حذف</button>
+        <button class="m-close" onclick="close1('mViewMoment')">✕</button>
+      </div>
+    </div>
+    <div class="modal-bd">
+      <!-- المعرض -->
+      <div class="mo-gallery" id="vMoGallery" style="display:none;margin-bottom:1rem"></div>
+      
+      <!-- التفاصيل -->
+      <div id="vMoText" style="font-size:.95rem;line-height:1.85;white-space:pre-wrap;color:var(--muted2);margin-bottom:1.5rem"></div>
+      
+      <!-- الصوت -->
+      <div class="mo-audio-row" id="vMoAudioRow" style="display:none;margin-bottom:1.5rem">
+        <audio id="vMoAudioPlayer" controls style="width:100%;border-radius:12px;accent-color:var(--accent);"></audio>
+      </div>
+
+
+
+      <div id="vMoDate" style="font-size:.75rem;color:var(--muted);margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)"></div>
+    </div>
+  </div>
+</div>
+
+
 <!-- Add Habit -->
 <div class="modal-overlay" id="mAddHabit">
   <div class="modal">
@@ -962,7 +1304,7 @@
 <!-- Admin -->
 <div class="modal-overlay" id="mAdmin">
   <div class="modal" style="max-width:560px">
-    <div class="modal-hd"><div class="modal-ttl">⚙️ إدارة المهام</div><button class="m-close" onclick="close1('mAdmin')">✕</button></div>
+    <div class="modal-hd"><div class="modal-ttl">⚙️ إدارة التاسكات</div><button class="m-close" onclick="close1('mAdmin')">✕</button></div>
     <div class="modal-bd">
       <div class="atabs" style="flex-wrap: wrap;">
         <button class="atab active" id="ab-add" onclick="aTab('add')">➕ مهمة</button>
@@ -995,7 +1337,7 @@
       <!-- reset -->
       <div id="at-reset" style="display:none">
         <div style="text-align:center;padding:1.5rem 0;">
-          <p style="color:var(--danger);font-weight:700;margin-bottom:1.5rem;">تحذير: سيتم حذف جميع المهام والبيانات نهائياً!</p>
+          <p style="color:var(--danger);font-weight:700;margin-bottom:1.5rem;">تحذير: سيتم حذف جميع التاسكات والبيانات نهائياً!</p>
           <button class="btn btn-d" onclick="doReset()">إعادة ضبط المصنع 🔄</button>
         </div>
       </div>
@@ -1042,9 +1384,38 @@ async function sbUpsert(data) {
 
 function setSyncDot(state) {
   const d = document.getElementById('syncDot');
-  if (!d) return;
-  d.className = 'sync-dot' + (state === 'ok' ? '' : state === 'syncing' ? ' syncing' : ' error');
+  if (d) {
+    d.className = 'sync-dot' + (state === 'ok' ? '' : state === 'syncing' ? ' syncing' : ' error');
+  }
+
+  const pill = document.getElementById('syncStatusPill');
+  const txt = document.getElementById('syncStatusText');
+  if (pill && txt) {
+    if (!navigator.onLine) {
+      pill.className = 'sync-status-pill offline';
+      txt.textContent = 'أوفلاين (لا يتزامن) ⚠️';
+    } else if (state === 'ok') {
+      pill.className = 'sync-status-pill online';
+      txt.textContent = 'متصل ومزامن ☁️';
+    } else if (state === 'syncing') {
+      pill.className = 'sync-status-pill syncing';
+      txt.textContent = 'جاري المزامنة... ⏳';
+    } else {
+      pill.className = 'sync-status-pill offline';
+      txt.textContent = 'خطأ مزامنة ⚠️';
+    }
+  }
 }
+
+// Add Online/Offline Listeners
+window.addEventListener('online', () => {
+  toast('🌐 تم استعادة الاتصال بالإنترنت! جاري المزامنة...');
+  saveToCloud();
+});
+window.addEventListener('offline', () => {
+  toast('⚠️ انقطع الاتصال بالإنترنت! تعملين الآن في وضع الأوفلاين.');
+  setSyncDot('error');
+});
 
 // ═══════════════════════════════════════════════════════
 // CONTENT FROM content.js
@@ -1067,6 +1438,7 @@ let tasks    = ls('tasks', []);
 let doneMap  = ls('done', {});
 let notes    = ls('notes', []);
 let habits   = ls('habits', []);
+let moments  = ls('moments', []);
 let hLog     = ls('hLog', {});
 let isLight  = ls('isLight', false);
 let curPage  = 'tasks';
@@ -1089,7 +1461,13 @@ function scheduleSave() {
 let lastSyncTime = '';
 
 async function saveToCloud() {
+  if (!navigator.onLine) {
+    setSyncDot('error');
+    return;
+  }
   const updatedAt = new Date().toISOString();
+  hLog._moments = moments;
+  hLog._fadfadat = fadfadat;
   const success = await sbUpsert({
     id: USER_ID,
     password: CORRECT_PASS,
@@ -1118,11 +1496,21 @@ async function loadFromCloud() {
       if (row.h_log    && typeof row.h_log==='object') { 
         hLog   = row.h_log;   
         lsS('hLog',    hLog);    
+        
         if (hLog._fadfadat && Array.isArray(hLog._fadfadat)) {
           fadfadat = hLog._fadfadat;
           lsS('fadfadat', fadfadat);
         } else {
           hLog._fadfadat = fadfadat;
+          lsS('hLog', hLog);
+          scheduleSave();
+        }
+
+        if (hLog._moments && Array.isArray(hLog._moments)) {
+          moments = hLog._moments;
+          lsS('moments', moments);
+        } else {
+          hLog._moments = moments;
           lsS('hLog', hLog);
           scheduleSave();
         }
@@ -1142,6 +1530,7 @@ async function loadFromCloud() {
 }
 
 async function checkUpdatesFromCloud() {
+  if (!navigator.onLine) return;
   if (syncTimer !== null) return;
   const openModal = document.querySelector('.modal-overlay.open, .fadfada-modal-overlay.open');
   if (openModal) return;
@@ -1158,6 +1547,7 @@ async function checkUpdatesFromCloud() {
           else if (curPage === 'notes') renderNotes();
           else if (curPage === 'habits') renderHabits();
           else if (curPage === 'fadfadat') renderFadfadat();
+          else if (curPage === 'moments') renderMoments();
         }
       }
     }
@@ -1259,8 +1649,8 @@ document.addEventListener('click',function(e){
   const r=el.getBoundingClientRect();
   const s=Math.max(r.width,r.height)*2;
   rip.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.22);animation:ripple .65s linear;width:'+s+'px;height:'+s+'px;left:'+(e.clientX-r.left-s/2)+'px;top:'+(e.clientY-r.top-s/2)+'px;pointer-events:none;z-index:9';
-  const ps=el.style.position;
-  if(!ps||ps==='static')el.style.position='relative';
+  const ps=window.getComputedStyle(el).position;
+  if(ps==='static')el.style.position='relative';
   el.style.overflow='hidden';
   el.appendChild(rip);
   setTimeout(()=>rip.remove(),700);
@@ -1279,8 +1669,8 @@ function close1(id){document.getElementById(id).classList.remove('open');}
 function toggleNav(){snd('open');document.getElementById('sideNav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');}
 function closeNav(){document.getElementById('sideNav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');}
 
-const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️',dini:'ديني 🕌',fadfadat:'الفضفضات 💬'};
-const fabPages=['tasks','notes','habits'];
+const pageTitles={tasks:'تاسكاتي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️',dini:'ديني 🕌',fadfadat:'الفضفضات 💬',moments:'لحظات حلوة 🌸'};
+const fabPages=['tasks','notes','habits','moments'];
 
 function showPage(p){
   snd('open');
@@ -1298,6 +1688,7 @@ function showPage(p){
   if(p==='quotes')renderQuotes();
   if(p==='dini')initDiniPage();
   if(p==='fadfadat')renderFadfadat();
+  if(p==='moments')renderMoments();
 }
 
 function onFab(){
@@ -1305,6 +1696,7 @@ function onFab(){
   if(curPage==='tasks')openModal('mAddTask',()=>{fillSubSel('tSub');document.getElementById('tDate').value='';document.getElementById('tText').value='';});
   else if(curPage==='notes')openModal('mAddNote',()=>{document.getElementById('nTitle').value='';document.getElementById('nBody').value='';noteColor='';document.querySelectorAll('.color-opt').forEach(b=>b.classList.remove('picked'));});
   else if(curPage==='habits')openModal('mAddHabit',()=>{document.getElementById('hName').value='';selDays=[0,1,2,3,4,5,6];document.querySelectorAll('.day-btn').forEach(b=>b.classList.add('sel'));});
+  else if(curPage==='moments')openAddMomentModal();
 }
 
 function openModal(id,cb){if(cb)cb();document.getElementById(id).classList.add('open');}
@@ -1349,20 +1741,20 @@ function renderDayCard(){
   if (total > 0) {
     const listHtml = dayTasks.map(taskItem).join('');
     todayCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
-      '<div class="dc-head"><div class="dc-title">مهام اليوم ✨</div>'+
+      '<div class="dc-head"><div class="dc-title">تاسكات اليوم ✨</div>'+
       '<div class="prog-ring"><svg width="54" height="54" viewBox="0 0 54 54"><circle class="prg-bg" cx="27" cy="27" r="22"/><circle class="prg-fill" cx="27" cy="27" r="22" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="prg-num">'+pct+'%</div></div></div>'+
       '<div class="tasks-list" id="todayTasksList">'+listHtml+'</div></div>';
   } else {
     todayCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
-      '<div class="dc-head"><div class="dc-title">مهام اليوم ✨</div></div>'+
-      '<div class="empty" style="padding:2rem 1.5rem"><span class="empty-em" style="font-size:2.5rem">📭</span><div style="font-weight:700;font-size:.9rem">لا توجد مهام مجدولة لليوم</div></div></div>';
+      '<div class="dc-head"><div class="dc-title">تاسكات اليوم ✨</div></div>'+
+      '<div class="empty" style="padding:2rem 1.5rem"><span class="empty-em" style="font-size:2.5rem">📭</span><div style="font-weight:700;font-size:.9rem">مفيش تاسكات مجدولة لليوم</div></div></div>';
   }
 
   let permCardHtml = '';
   if (permTasks.length > 0) {
     const listHtml = permTasks.map(taskItem).join('');
     permCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
-      '<div class="dc-head"><div class="dc-title">مهام مستمرة 💫</div></div>'+
+      '<div class="dc-head"><div class="dc-title">تاسكات مستمرة 💫</div></div>'+
       '<div class="tasks-list" id="permTasksList">'+listHtml+'</div></div>';
   }
 
@@ -1370,7 +1762,7 @@ function renderDayCard(){
   if (completedPermTasks.length > 0) {
     const listHtml = completedPermTasks.map(taskItem).join('');
     completedPermCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
-      '<div class="dc-head"><div class="dc-title">مهام منتهية ✅</div></div>'+
+      '<div class="dc-head"><div class="dc-title">تاسكات منتهية ✅</div></div>'+
       '<div class="tasks-list" id="completedTasksList">'+listHtml+'</div></div>';
   }
 
@@ -1397,7 +1789,7 @@ function renderDayCard(){
   }
 
   if (total===0 && permTasks.length===0 && completedPermTasks.length===0 && todayHabits.length===0) {
-    ct.innerHTML='<div class="empty"><span class="empty-em">📭</span><div style="font-weight:700">لا توجد مهام حالية</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لإضافة مهمة جديدة</div></div>';
+    ct.innerHTML='<div class="empty"><span class="empty-em">📭</span><div style="font-weight:700">مفيش تاسكات حالية</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لإضافة مهمة جديدة</div></div>';
   } else {
     ct.innerHTML=todayCardHtml+permCardHtml+completedPermCardHtml+habitsCardHtml;
     if (typeof initSortablesHome === 'function') {
@@ -1555,7 +1947,7 @@ function saveNote(){
 
 function renderNotes(){
   const g=document.getElementById('notesGrid');
-  if(!notes.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><span class="empty-em">📭</span><div style="font-weight:700">لا توجد ملاحظات بعد</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لكتابة أول ملاحظة</div></div>';return;}
+  if(!notes.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><span class="empty-em">📭</span><div style="font-weight:700">مفيش ملاحظات بعد</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لكتابة أول ملاحظة</div></div>';return;}
   g.innerHTML=notes.map(n=>{
     let displayDate = n.date || '';
     const splitIdx = displayDate.indexOf(' · ✏️ تعديل');
@@ -1645,7 +2037,7 @@ function saveHabit(){
 
 function renderHabits(){
   const list=document.getElementById('habitsList');
-  if(!habits.length){list.innerHTML='<div class="empty"><span class="empty-em">🔁</span><div style="font-weight:700">لا توجد عادات بعد</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لإضافة عادة جديدة</div></div>';return;}
+  if(!habits.length){list.innerHTML='<div class="empty"><span class="empty-em">🔁</span><div style="font-weight:700">مفيش عادات بعد</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لإضافة عادة جديدة</div></div>';return;}
   const todDay=new Date().getDay();
   const td=today();
   list.innerHTML=habits.map(h=>{
@@ -1704,7 +2096,7 @@ function calcStreak(id,days){
 function renderBooks(){
   const g=document.getElementById('booksGrid');
   const sm={want:{l:'أريد قراءته',c:'sw'},reading:{l:'أقرأه حالياً',c:'sr'},done:{l:'تمت القراءة ✅',c:'sd'}};
-  if(!BOOKS.length){g.innerHTML='<div class="empty"><span class="empty-em">📚</span><div style="font-weight:700">لا توجد كتب بعد</div></div>';return;}
+  if(!BOOKS.length){g.innerHTML='<div class="empty"><span class="empty-em">📚</span><div style="font-weight:700">مفيش كتب بعد</div></div>';return;}
   g.innerHTML=BOOKS.map(b=>{
     const s=sm[b.status]||sm.want;
     return '<a class="book-card" href="'+b.link+'" target="_blank" onclick="snd(\'click\')">'+
@@ -1767,7 +2159,7 @@ function addCustomTask(){
 
 function renderAdminList(){
   const w=document.getElementById('adminList');
-  if(!tasks.length){w.innerHTML='<div class="empty" style="padding:2rem">لا توجد مهام</div>';return;}
+  if(!tasks.length){w.innerHTML='<div class="empty" style="padding:2rem">مفيش تاسكات</div>';return;}
   w.innerHTML=tasks.map(t=>'<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface2);border-radius:16px;margin-bottom:9px">'+
     '<div style="flex:1"><div style="font-weight:700;font-size:.9rem">'+t.text+'</div>'+
     '<div style="font-size:.77rem;color:var(--muted);margin-top:3px">'+(t.date?t.date:'مهمة مستمرة 💫')+'</div></div>'+
@@ -1783,7 +2175,7 @@ function delTask(id){
 function renderDoneTasks(){
   const w=document.getElementById('doneList');
   const doneTasks = tasks.filter(t => !t.date && doneMap[t.id]);
-  if(!doneTasks.length){w.innerHTML='<div class="empty" style="padding:2rem">لا توجد مهام منتهية</div>';return;}
+  if(!doneTasks.length){w.innerHTML='<div class="empty" style="padding:2rem">مفيش تاسكات انتهت</div>';return;}
   w.innerHTML=doneTasks.sort((a,b)=>{
     const tA = typeof doneMap[a.id] === 'number' ? doneMap[a.id] : (doneMap[a.id] ? new Date(doneMap[a.id]).getTime() || 0 : 0);
     const tB = typeof doneMap[b.id] === 'number' ? doneMap[b.id] : (doneMap[b.id] ? new Date(doneMap[b.id]).getTime() || 0 : 0);
@@ -1974,7 +2366,7 @@ function saveHabitOrder(containerId) {
 
 function renderCats(){
   const w=document.getElementById('catsChips');
-  if(!Object.keys(cats).length){w.innerHTML='<div style="color:var(--muted);font-size:.85rem;padding:8px 0">لا توجد فئات بعد. أضيفي أول فئة!</div>';return;}
+  if(!Object.keys(cats).length){w.innerHTML='<div style="color:var(--muted);font-size:.85rem;padding:8px 0">مفيش فئات بعد. أضيفي أول فئة!</div>';return;}
   w.innerHTML=Object.entries(cats).map(([k,v])=>'<span class="chip" style="border-color:'+v.c+';color:'+v.c+';background:'+v.c+'18">'+v.n+
     '<button onclick="delCat(\''+k+'\')" style="background:none;border:none;cursor:pointer;color:inherit;font-size:.85rem;line-height:1;padding:0 2px">✕</button></span>').join('');
 }
@@ -1997,10 +2389,10 @@ function delCat(k){
 // ═══════════════════════════════════════════════════════
 function doReset(){
   if(!confirm('هل أنتِ متأكدة تماماً من مسح كل البيانات؟'))return;
-  if(!confirm('تأكيد أخير: كل المهام والملاحظات والعادات والفئات ستُحذف نهائياً!'))return;
+  if(!confirm('تأكيد أخير: كل التاسكات والملاحظات والعادات والفئات ستُحذف نهائياً!'))return;
   snd('del');
-  ['cats','tasks','done','notes','habits','hLog','isLight','fadfadat'].forEach(k=>localStorage.removeItem(k));
-  cats={};tasks=[];doneMap={};notes=[];habits=[];hLog={};fadfadat=[];
+  ['cats','tasks','done','notes','habits','hLog','isLight','fadfadat','moments'].forEach(k=>localStorage.removeItem(k));
+  cats={};tasks=[];doneMap={};notes=[];habits=[];hLog={};fadfadat=[];moments=[];
   close1('mAdmin');
   saveToCloud();
   toast('✅ تم المسح. جارٍ الإعادة...');
@@ -2621,6 +3013,355 @@ function renderPomoHistory() {
     </div>
   `).join('');
 }
+
+// ═══════════════════════════════════════════════════════
+// MOMENTS (لحظات حلوة)
+// ═══════════════════════════════════════════════════════
+
+let moImages = [];      // { dataUrl, name }[]
+let moLinks  = [];      // { label, url }[]
+let moAudio  = null;    // base64 audio string
+let moRecorder = null;
+let moIsRecording = false;
+let moAudioChunks = [];
+let viewMoId = null;
+let editMoId = null;
+
+// ─── Open Add Modal ────────────────────────────────────
+function openAddMomentModal() {
+  editMoId = null;
+  moImages = []; moLinks = []; moAudio = null;
+  document.getElementById('moTitle').value = '';
+  document.getElementById('moText').value  = '';
+  document.getElementById('moPreviews').innerHTML = '';
+  document.getElementById('moMicTxt').textContent = 'سجلي كلامك بصوتك';
+  document.getElementById('moMicBtn').style.background = 'var(--accent)';
+  document.getElementById('moImagesInput').value = '';
+  document.getElementById('moModalTtl').textContent = '🌸 توثيق لحظة حلوة جديدة';
+  document.getElementById('mAddMoment').classList.add('open');
+  snd('open');
+}
+
+// ─── Image handling ────────────────────────────────────
+function handleMoImagesSelect(input) {
+  const files = Array.from(input.files);
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      compressMoImage(e.target.result, compressed => {
+        moImages.push({ dataUrl: compressed, name: file.name });
+        renderMoPreviews();
+      });
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function compressMoImage(dataUrl, cb) {
+  const img = new Image();
+  img.onload = () => {
+    const maxW = 900, maxH = 900;
+    let w = img.width, h = img.height;
+    if (w > maxW) { h = Math.round(h * maxW / w); w = maxW; }
+    if (h > maxH) { w = Math.round(w * maxH / h); h = maxH; }
+    const canvas = document.createElement('canvas');
+    canvas.width = w; canvas.height = h;
+    canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+    cb(canvas.toDataURL('image/jpeg', 0.72));
+  };
+  img.src = dataUrl;
+}
+
+function renderMoPreviews() {
+  const el = document.getElementById('moPreviews');
+  el.innerHTML = moImages.map((img, i) => `
+    <div class="mo-preview-item">
+      <img src="${img.dataUrl}" alt="${img.name}">
+      <button class="mo-preview-del" onclick="removeMoImage(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeMoImage(i) {
+  moImages.splice(i, 1);
+  renderMoPreviews();
+}
+
+// ─── Links handling ────────────────────────────────────
+function addMoLink() {
+  const label = document.getElementById('moLinkLabel').value.trim();
+  const url   = document.getElementById('moLinkUrl').value.trim();
+  if (!url) { toast('⚠ أدخلي الرابط أولاً'); return; }
+  moLinks.push({ label: label || url, url });
+  document.getElementById('moLinkLabel').value = '';
+  document.getElementById('moLinkUrl').value   = '';
+  renderMoLinks();
+}
+
+function renderMoLinks() {
+  const el = document.getElementById('moLinksList');
+  if (!el) return;
+  el.innerHTML = moLinks.map((l, i) => `
+    <div class="mo-link-item">
+      🔗 <span>${l.label}</span>
+      <button onclick="removeMoLink(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+function removeMoLink(i) {
+  moLinks.splice(i, 1);
+  renderMoLinks();
+}
+
+// ─── Audio recording ───────────────────────────────────
+async function toggleMoMic() {
+  if (moIsRecording) {
+    stopMoMic();
+  } else {
+    await startMoMic();
+  }
+}
+
+async function startMoMic() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    moAudioChunks = [];
+    moRecorder = new MediaRecorder(stream);
+    moRecorder.ondataavailable = e => moAudioChunks.push(e.data);
+    moRecorder.onstop = () => {
+      const blob = new Blob(moAudioChunks, { type: 'audio/webm' });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        moAudio = reader.result;
+        document.getElementById('moMicTxt').textContent = '✅ تم التسجيل! اضغطي مجدداً للتسجيل من جديد';
+      };
+      reader.readAsDataURL(blob);
+      stream.getTracks().forEach(t => t.stop());
+    };
+    moRecorder.start();
+    moIsRecording = true;
+    document.getElementById('moMicBtn').textContent = '⏹';
+    document.getElementById('moMicBtn').style.background = 'var(--danger)';
+    document.getElementById('moMicTxt').textContent = 'جارٍ التسجيل... اضغطي للإيقاف';
+  } catch(e) {
+    toast('⚠️ مش قادر يوصل للمايك');
+  }
+}
+
+function stopMoMic() {
+  if (moRecorder && moIsRecording) {
+    moRecorder.stop();
+    moIsRecording = false;
+    document.getElementById('moMicBtn').textContent = '🎙️';
+    document.getElementById('moMicBtn').style.background = 'var(--accent)';
+  }
+}
+
+// ─── Save Moment ───────────────────────────────────────
+function saveMoment() {
+  const title = document.getElementById('moTitle').value.trim();
+  const text  = document.getElementById('moText').value.trim();
+  if (!title) { toast('⚠ اكتبي عنوان اللحظة'); return; }
+
+  if (editMoId) {
+    const idx = moments.findIndex(m => m.id === editMoId);
+    if (idx !== -1) {
+      moments[idx].title = title;
+      moments[idx].text = text;
+      moments[idx].images = [...moImages];
+      moments[idx].links = [...moLinks];
+      moments[idx].audio = moAudio;
+    }
+    editMoId = null;
+    toast('🌸 تم تعديل اللحظة الحلوة!');
+  } else {
+    const now = new Date();
+    const dayName  = DAYS_AR[now.getDay()];
+    const datePart = now.toLocaleDateString('ar-EG', { year:'numeric', month:'long', day:'numeric' });
+    const timePart = now.toLocaleTimeString('ar-EG', { hour:'2-digit', minute:'2-digit', hour12: true });
+    const dateStr  = `${dayName}، ${datePart} - ${timePart}`;
+
+    const moment = {
+      id:     Date.now() + '',
+      title,
+      text,
+      images: [...moImages],
+      links:  [...moLinks],
+      audio:  moAudio,
+      date:   dateStr
+    };
+
+    moments.unshift(moment);
+    toast('🌸 تم حفظ اللحظة الحلوة!');
+  }
+
+  lsS('moments', moments);
+  hLog._moments = moments;
+  lsS('hLog', hLog);
+  close1('mAddMoment');
+  renderMoments();
+  snd('ok');
+  scheduleSave();
+}
+
+// ─── Render Moments Grid ───────────────────────────────
+function renderMoments() {
+  const g = document.getElementById('momentsGrid');
+  if (!g) return;
+
+  if (!moments.length) {
+    g.innerHTML = `
+      <div class="empty" style="grid-column:1/-1;text-align:center;padding:3rem 1rem">
+        <div style="font-size:3rem;margin-bottom:1rem">🌸</div>
+        <div style="font-weight:700;font-size:1rem">مفيش لحظات بعد</div>
+        <div style="font-size:.82rem;margin-top:8px;color:var(--muted)">اضغطي + لتوثيق أول لحظة حلوة في حياتك ✨</div>
+      </div>`;
+    return;
+  }
+
+  g.innerHTML = moments.map(m => {
+    const thumb = m.images && m.images.length ? `
+      <div class="moment-img-container">
+        <img src="${m.images[0].dataUrl}" alt="${m.title}">
+      </div>` : '';
+
+    return `
+      <div class="moment-card" onclick="viewMoment('${m.id}')">
+        ${thumb}
+        <div class="moment-card-title">${m.title}</div>
+        <div class="moment-card-meta">
+          <span>🕐 ${m.date}</span>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ─── View Moment Modal ─────────────────────────────────
+function viewMoment(id) {
+  const m = moments.find(x => x.id === id);
+  if (!m) return;
+  viewMoId = id;
+
+  document.getElementById('vMoTitle').textContent = m.title;
+  document.getElementById('vMoText').textContent  = m.text || '';
+  document.getElementById('vMoDate').textContent  = '📅 ' + m.date;
+
+  // Gallery
+  const gallery = document.getElementById('vMoGallery');
+  if (m.images && m.images.length) {
+    gallery.style.display = 'flex';
+    gallery.innerHTML = m.images.map(img => `
+      <div class="mo-gallery-img">
+        <img src="${img.dataUrl}" alt="${img.name}" onclick="openMoImageFull(this.src)">
+      </div>`).join('');
+  } else {
+    gallery.style.display = 'none';
+    gallery.innerHTML = '';
+  }
+
+  // Audio
+  const audioRow = document.getElementById('vMoAudioRow');
+  if (m.audio) {
+    audioRow.style.display = 'flex';
+    document.getElementById('vMoAudioPlayer').src = m.audio;
+  } else {
+    audioRow.style.display = 'none';
+    document.getElementById('vMoAudioPlayer').src = '';
+  }
+
+  // Links
+  const linksContainer = document.getElementById('vMoLinksContainer');
+  const linksEl = document.getElementById('vMoLinks');
+  if (linksContainer && linksEl) {
+    if (m.links && m.links.length) {
+      linksContainer.style.display = 'block';
+      linksEl.innerHTML = m.links.map(l => `
+        <div class="mo-link-item">
+          🔗 <a href="${l.url}" target="_blank" style="color:var(--accent);text-decoration:none">${l.label}</a>
+        </div>`).join('');
+    } else {
+      linksContainer.style.display = 'none';
+      linksEl.innerHTML = '';
+    }
+  }
+
+  snd('open');
+  document.getElementById('mViewMoment').classList.add('open');
+}
+
+// ─── Edit Moment ───────────────────────────────────────
+function editViewMoment() {
+  const m = moments.find(x => x.id === viewMoId);
+  if (!m) return;
+  
+  editMoId = m.id;
+  
+  // Fill inputs
+  document.getElementById('moTitle').value = m.title;
+  document.getElementById('moText').value  = m.text || '';
+  
+  // Fill images
+  moImages = m.images ? [...m.images] : [];
+  renderMoPreviews();
+  
+  // Fill links
+  moLinks = m.links ? [...m.links] : [];
+  renderMoLinks();
+  
+  // Fill audio
+  moAudio = m.audio;
+  if (moAudio) {
+    document.getElementById('moMicTxt').textContent = '✅ تم التسجيل! اضغطي مجدداً للتسجيل من جديد';
+  } else {
+    document.getElementById('moMicTxt').textContent = 'سجلي كلامك بصوتك';
+  }
+  document.getElementById('moMicBtn').style.background = 'var(--accent)';
+  document.getElementById('moImagesInput').value = '';
+  
+  // Update modal title
+  document.getElementById('moModalTtl').textContent = '✏️ تعديل اللحظة الحلوة';
+  
+  // Switch modals
+  close1('mViewMoment');
+  openModal('mAddMoment', null);
+  snd('open');
+}
+
+// ─── Full Image Viewer ─────────────────────────────────
+function openMoImageFull(src) {
+  const overlay = document.createElement('div');
+  overlay.style.cssText = `
+    position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,0.92);
+    display:flex;align-items:center;justify-content:center;cursor:zoom-out;
+    animation:fadeIn .2s ease;
+  `;
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.cssText = 'max-width:95vw;max-height:92vh;border-radius:16px;object-fit:contain;';
+  overlay.appendChild(img);
+  overlay.onclick = () => overlay.remove();
+  document.body.appendChild(overlay);
+}
+
+// ─── Delete Moment ─────────────────────────────────────
+function deleteViewMoment() {
+  if (!viewMoId) return;
+  if (!confirm('حذف هذه اللحظة نهائياً؟')) return;
+  snd('del');
+  moments = moments.filter(m => m.id !== viewMoId);
+  lsS('moments', moments);
+  hLog._moments = moments;
+  lsS('hLog', hLog);
+  close1('mViewMoment');
+  renderMoments();
+  toast('🗑 تم الحذف');
+  scheduleSave();
+}
+
+// ─── Background sync update for moments ───────────────
+// Already covered by checkUpdatesFromCloud → renderMoments() when curPage === 'moments'
+
 </script>
 </body>
 </html>
