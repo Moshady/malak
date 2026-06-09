@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,8 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Malak World ✨</title>
   <script src="content.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
   <style>
+    .sortable-ghost {
+      opacity: 0.4;
+      border: 2px dashed var(--accent) !important;
+      background: var(--surface3) !important;
+    }
     :root {
       --bg: #080812;
       --surface: #10101e;
@@ -445,7 +452,7 @@
     .feeling-native-select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(224,127,154,.1);}
     .feeling-native-select option{background:var(--surface);color:var(--text);font-family:'Cairo',sans-serif;padding:12px;}
 
-
+    
 
 
 
@@ -461,6 +468,117 @@
       .login-card{padding:2.5rem 1.5rem 2rem;}
       .login-title{font-size:1.6rem;}
     }
+
+
+        /* ── FADFADA ── */
+    .fadfada-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin: 1.25rem auto 0; padding: 13px 28px;
+      background: linear-gradient(135deg, rgba(224,127,154,.15), rgba(155,119,224,.15));
+      border: 1.5px solid rgba(224,127,154,.35);
+      border-radius: 50px; cursor: pointer;
+      font-family: 'Cairo', sans-serif; font-size: .95rem; font-weight: 800;
+      color: var(--accent); transition: all .25s;
+      position: relative; overflow: hidden;
+    }
+    .fadfada-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(224,127,154,.25); background: linear-gradient(135deg, rgba(224,127,154,.22), rgba(155,119,224,.22)); }
+
+      /* Modal الفضفضة */
+    .fadfada-modal-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(14px);
+  display: flex; align-items: flex-start; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .35s;
+  padding: 4rem 1.25rem 1.25rem;
+  overflow-y: auto;
+}
+.fadfada-modal-overlay.open { opacity: 1; pointer-events: all; }
+.fadfada-modal {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 32px;
+  width: 100%; max-width: 500px;
+  padding: 2rem 1.75rem 2rem;
+  transform: scale(0.95) translateY(20px);
+  transition: transform .4s cubic-bezier(0.34,1.2,0.64,1);
+  display: flex; flex-direction: column;
+  height: fit-content;
+}
+.fadfada-modal-overlay.open .fadfada-modal { transform: scale(1) translateY(0); }
+.fadfada-mic-row { margin-top: .85rem; }
+.fadfada-mic-btn {
+  width: 100%; padding: 13px;
+  background: var(--surface2); border: 1.5px solid var(--border2);
+  border-radius: 16px; color: var(--text);
+  font-family: 'Cairo', sans-serif; font-size: .92rem; font-weight: 800;
+  cursor: pointer; transition: all .25s; display: flex;
+  align-items: center; justify-content: center; gap: 8px;
+}
+.fadfada-mic-btn:hover { border-color: var(--accent); color: var(--accent); }
+.fadfada-mic-btn.recording {
+  background: rgba(248,113,113,.12); border-color: var(--danger);
+  color: var(--danger); animation: micPulse 1.2s ease-in-out infinite;
+}
+@keyframes micPulse { 0%,100%{box-shadow:0 0 0 0 rgba(248,113,113,.4)} 50%{box-shadow:0 0 0 8px rgba(248,113,113,0)} }
+
+
+
+    .fadfada-modal-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 1.25rem;
+    }
+    .fadfada-modal-title {
+      font-family: 'Tajawal', sans-serif; font-size: 1.3rem; font-weight: 900;
+      color: var(--accent);
+    }
+    .fadfada-textarea {
+      width: 100%; min-height: 160px; max-height: 280px;
+      background: var(--surface2); border: 1.5px solid var(--border2);
+      border-radius: 20px; padding: 18px; resize: none;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 500;
+      color: var(--text); line-height: 1.8; outline: none; transition: border-color .2s;
+    }
+    .fadfada-textarea:focus { border-color: rgba(224,127,154,.55); box-shadow: 0 0 0 4px rgba(224,127,154,.09); }
+    .fadfada-textarea::placeholder { color: var(--muted); font-size: .9rem; }
+    .fadfada-done-btn {
+      margin-top: 1.1rem; width: 100%; padding: 15px;
+      background: linear-gradient(135deg, #e07f9a, #9b77e0);
+      border: none; border-radius: 18px; color: #fff;
+      font-family: 'Cairo', sans-serif; font-size: 1rem; font-weight: 800;
+      cursor: pointer; transition: all .3s;
+      box-shadow: 0 8px 25px rgba(224,127,154,.35);
+    }
+    .fadfada-done-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 35px rgba(224,127,154,.5); }
+
+    /* صفحة الفضفضات */
+    .fadfada-empty { text-align: center; padding: 3rem 1rem; color: var(--muted); }
+    .fadfada-empty .fe-ico { font-size: 3rem; margin-bottom: 1rem; }
+    .fadfada-entry {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 22px; padding: 1.25rem 1.5rem; margin-bottom: 12px;
+      animation: fadeUp .35s ease both; position: relative; overflow: hidden;
+    }
+    .fadfada-entry::before {
+      content: ''; position: absolute; right: 0; top: 0; bottom: 0;
+      width: 4px; background: linear-gradient(180deg, var(--accent), var(--accent3));
+      border-radius: 0 22px 22px 0;
+    }
+    .fadfada-entry-text {
+      font-size: .95rem; line-height: 1.85; color: var(--text);
+      white-space: pre-wrap; margin-bottom: .85rem;
+    }
+    .fadfada-entry-foot {
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid var(--border); padding-top: .7rem;
+    }
+    .fadfada-entry-date { font-size: .75rem; color: var(--muted); }
+    .fadfada-del-btn {
+      background: none; border: none; color: var(--muted);
+      cursor: pointer; font-size: .85rem; padding: 4px 10px;
+      border-radius: 8px; transition: .2s; font-family: 'Cairo', sans-serif;
+    }
+    .fadfada-del-btn:hover { color: var(--danger); background: rgba(248,113,113,.1); }
+
   </style>
 </head>
 <body>
@@ -509,6 +627,7 @@
   </div>
   <nav class="nav-items">
     <div class="nav-item active" id="ni-tasks" onclick="showPage('tasks')"><span class="nav-icon">📑</span><span>مهامي</span></div>
+    <div class="nav-item" id="ni-fadfadat" onclick="showPage('fadfadat')"><span class="nav-icon">💬</span><span>الفضفضات</span></div>
     <div class="nav-item" id="ni-notes" onclick="showPage('notes')"><span class="nav-icon">📝</span><span>ملاحظاتي</span></div>
     <div class="nav-item" id="ni-habits" onclick="showPage('habits')"><span class="nav-icon">🔁</span><span>عاداتي</span></div>
     <!-- <div class="nav-item" id="ni-books" onclick="showPage('books')"><span class="nav-icon">📚</span><span>مكتبتي</span></div> -->
@@ -599,6 +718,12 @@
       <div class="date-lbl" id="todayLbl">...</div>
       <div class="welcome">اهلا بيكي<br><span class="accent-w">يكتكوته ✨</span></div>
       <div class="daily-s" id="dailySentence">...</div>
+      <!-- زرار الفضفضة -->
+      <div style="text-align:center">
+        <button class="fadfada-btn" onclick="openFadfada()">
+          💬 فضفضي
+        </button>
+      </div>
     </header>
     <div id="dayContent"></div>
   </div>
@@ -695,6 +820,17 @@
     </div>
     <div id="habitsList"></div>
   </div>
+  <!-- FADFADAT PAGE -->
+  <div id="pg-fadfadat" style="display:none">
+    <div class="pg-head">
+      <div class="pg-icon" style="background:linear-gradient(135deg,rgba(224,127,154,.15),rgba(155,119,224,.15))">💬</div>
+      <div class="pg-info"><h2>الفضفضات</h2><p>كل اللي فضفضتيه محفوظ هنا 🤍</p></div>
+    </div>
+    <div id="fadfadatList"></div>
+  </div>
+
+
+
 
   <!-- BOOKS PAGE -->
   <div id="pg-books" style="display:none">
@@ -725,7 +861,24 @@
 <button class="fab" id="fab" onclick="onFab()">＋</button>
 <div class="toast" id="toast"></div>
 
-<!-- ── MODALS ── -->
+<!-- Fadfada Modal -->
+<div class="fadfada-modal-overlay" id="fadfadaOverlay">
+  <div class="fadfada-modal" id="fadfadaModal">
+    <div class="fadfada-modal-head">
+      <div class="fadfada-modal-title">💬 فضفضي براحتك</div>
+      <button onclick="closeFadfada()" style="background:var(--surface2);border:1px solid var(--border);width:36px;height:36px;border-radius:12px;cursor:pointer;font-size:1rem;color:var(--muted);">✕</button>
+    </div>
+    <textarea class="fadfada-textarea" id="fadfadaInput" placeholder="اكتبي اللي في قلبك... مفيش حد هيشوفه غيرك 🤍"></textarea>
+    <div class="fadfada-mic-row">
+      <button class="fadfada-mic-btn" id="fadfadaMicBtn" onclick="toggleFadfadaMic()">🎙️ <span id="fadfadaMicTxt">سجّلي صوتك</span></button>
+    </div>
+    <button class="fadfada-done-btn" onclick="saveFadfada()">خلصت ✨</button>
+  </div>
+</div>
+
+
+
+
 
 <!-- Add Task -->
 <div class="modal-overlay" id="mAddTask">
@@ -763,18 +916,19 @@
   </div>
 </div>
 
-<!-- View Note -->
+<!-- View / Edit Note -->
 <div class="modal-overlay" id="mViewNote">
   <div class="modal" id="viewCard">
     <div class="modal-hd">
-      <div class="modal-ttl" id="vNTitle"></div>
+      <div class="modal-ttl" id="vNTitle" contenteditable="true" spellcheck="false" style="outline:none;min-width:40px;cursor:text"></div>
       <div style="display:flex;gap:8px">
+        <button onclick="updateNote()" style="background:rgba(74,222,128,.1);border:1px solid rgba(74,222,128,.3);color:var(--success);border-radius:12px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:800">💾 حفظ</button>
         <button onclick="deleteViewNote()" style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);border-radius:12px;padding:8px 14px;cursor:pointer;font-size:.82rem;font-weight:800">🗑 حذف</button>
         <button class="m-close" onclick="close1('mViewNote')">✕</button>
       </div>
     </div>
     <div class="modal-bd">
-      <div id="vNBody" style="font-size:.97rem;line-height:1.9;white-space:pre-wrap;color:var(--muted2)"></div>
+      <div id="vNBody" contenteditable="true" spellcheck="false" style="font-size:.97rem;line-height:1.9;white-space:pre-wrap;color:var(--muted2);outline:none;min-height:60px;cursor:text"></div>
       <div id="vNDate" style="font-size:.75rem;color:var(--muted);margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)"></div>
     </div>
   </div>
@@ -810,10 +964,11 @@
   <div class="modal" style="max-width:560px">
     <div class="modal-hd"><div class="modal-ttl">⚙️ إدارة المهام</div><button class="m-close" onclick="close1('mAdmin')">✕</button></div>
     <div class="modal-bd">
-      <div class="atabs">
+      <div class="atabs" style="flex-wrap: wrap;">
         <button class="atab active" id="ab-add" onclick="aTab('add')">➕ مهمة</button>
         <button class="atab" id="ab-manage" onclick="aTab('manage')">📋 إدارة</button>
         <button class="atab" id="ab-cats" onclick="aTab('cats')">🏷 الفئات</button>
+        <button class="atab" id="ab-done" onclick="aTab('done')">✅ المنتهية</button>
         <button class="atab" id="ab-reset" onclick="aTab('reset')">🔄 إعادة</button>
       </div>
       <!-- add -->
@@ -835,6 +990,8 @@
         </div>
         <button class="btn btn-p" onclick="addCat()">إضافة الفئة ✅</button>
       </div>
+      <!-- done -->
+      <div id="at-done" style="display:none"><div id="doneList" style="max-height:400px;overflow-y:auto"></div></div>
       <!-- reset -->
       <div id="at-reset" style="display:none">
         <div style="text-align:center;padding:1.5rem 0;">
@@ -918,6 +1075,8 @@ let noteColor= '';
 let viewNId  = null;
 let selDays  = [0,1,2,3,4,5,6];
 let syncTimer = null;
+let dragOccurred = false;
+let noteEditColor = '';
 
 // ═══════════════════════════════════════════════════════
 // SYNC TO SUPABASE
@@ -927,8 +1086,11 @@ function scheduleSave() {
   syncTimer = setTimeout(saveToCloud, 1500);
 }
 
+let lastSyncTime = '';
+
 async function saveToCloud() {
-  await sbUpsert({
+  const updatedAt = new Date().toISOString();
+  const success = await sbUpsert({
     id: USER_ID,
     password: CORRECT_PASS,
     tasks:    tasks,
@@ -937,23 +1099,71 @@ async function saveToCloud() {
     h_log:    hLog,
     cats:     cats,
     done_map: doneMap,
-    updated_at: new Date().toISOString()
+    updated_at: updatedAt
   });
+  if (success) {
+    lastSyncTime = updatedAt;
+    lsS('lastSyncTime', lastSyncTime);
+  }
 }
 
 async function loadFromCloud() {
-  const data = await sbGet('/rest/v1/user_data?id=eq.' + USER_ID + '&select=*');
-  if (data && data[0]) {
-    const row = data[0];
-    if (row.tasks    && Array.isArray(row.tasks))   { tasks   = row.tasks;   lsS('tasks',   tasks);   }
-    if (row.notes    && Array.isArray(row.notes))   { notes   = row.notes;   lsS('notes',   notes);   }
-    if (row.habits   && Array.isArray(row.habits))  { habits  = row.habits;  lsS('habits',  habits);  }
-    if (row.h_log    && typeof row.h_log==='object') { hLog   = row.h_log;   lsS('hLog',    hLog);    }
-    if (row.cats     && typeof row.cats==='object')  { cats   = row.cats;    lsS('cats',    cats);    }
-    if (row.done_map && typeof row.done_map==='object') { doneMap = row.done_map; lsS('done', doneMap); }
-    return true;
+  try {
+    const data = await sbGet('/rest/v1/user_data?id=eq.' + USER_ID + '&select=*');
+    if (data && data[0]) {
+      const row = data[0];
+      if (row.tasks    && Array.isArray(row.tasks))   { tasks   = row.tasks;   lsS('tasks',   tasks);   }
+      if (row.notes    && Array.isArray(row.notes))   { notes   = row.notes;   lsS('notes',   notes);   }
+      if (row.habits   && Array.isArray(row.habits))  { habits  = row.habits;  lsS('habits',  habits);  }
+      if (row.h_log    && typeof row.h_log==='object') { 
+        hLog   = row.h_log;   
+        lsS('hLog',    hLog);    
+        if (hLog._fadfadat && Array.isArray(hLog._fadfadat)) {
+          fadfadat = hLog._fadfadat;
+          lsS('fadfadat', fadfadat);
+        } else {
+          hLog._fadfadat = fadfadat;
+          lsS('hLog', hLog);
+          scheduleSave();
+        }
+      }
+      if (row.cats     && typeof row.cats==='object')  { cats   = row.cats;    lsS('cats',    cats);    }
+      if (row.done_map && typeof row.done_map==='object') { doneMap = row.done_map; lsS('done', doneMap); }
+      if (row.updated_at) {
+        lastSyncTime = row.updated_at;
+        lsS('lastSyncTime', lastSyncTime);
+      }
+      return true;
+    }
+  } catch (e) {
+    console.error(e);
   }
   return false;
+}
+
+async function checkUpdatesFromCloud() {
+  if (syncTimer !== null) return;
+  const openModal = document.querySelector('.modal-overlay.open, .fadfada-modal-overlay.open');
+  if (openModal) return;
+
+  try {
+    const data = await sbGet('/rest/v1/user_data?id=eq.' + USER_ID + '&select=updated_at');
+    if (data && data[0]) {
+      const dbUpdatedAt = data[0].updated_at;
+      const cachedSyncTime = ls('lastSyncTime', lastSyncTime);
+      if (dbUpdatedAt && dbUpdatedAt !== cachedSyncTime) {
+        const loaded = await loadFromCloud();
+        if (loaded) {
+          if (curPage === 'tasks') renderDayCard();
+          else if (curPage === 'notes') renderNotes();
+          else if (curPage === 'habits') renderHabits();
+          else if (curPage === 'fadfadat') renderFadfadat();
+        }
+      }
+    }
+  } catch (e) {
+    console.error('Background sync failed:', e);
+  }
 }
 
 // ═══════════════════════════════════════════════════════
@@ -999,6 +1209,9 @@ async function doLogin() {
 
   // Save session
   lsS('loggedIn', true);
+  
+  // Start background sync
+  setInterval(checkUpdatesFromCloud, 10000);
 
   setTimeout(() => {
     document.getElementById('loginOverlay').classList.add('hide');
@@ -1066,7 +1279,7 @@ function close1(id){document.getElementById(id).classList.remove('open');}
 function toggleNav(){snd('open');document.getElementById('sideNav').classList.toggle('open');document.getElementById('navOverlay').classList.toggle('open');}
 function closeNav(){document.getElementById('sideNav').classList.remove('open');document.getElementById('navOverlay').classList.remove('open');}
 
-const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️',dini:'ديني 🕌'};
+const pageTitles={tasks:'مهامي',notes:'ملاحظاتي',habits:'عاداتي',books:'مكتبتي',quotes:'كلام جميل',pomodoro:'مؤقت التركيز ⏱️',dini:'ديني 🕌',fadfadat:'الفضفضات 💬'};
 const fabPages=['tasks','notes','habits'];
 
 function showPage(p){
@@ -1084,6 +1297,7 @@ function showPage(p){
   if(p==='books')renderBooks();
   if(p==='quotes')renderQuotes();
   if(p==='dini')initDiniPage();
+  if(p==='fadfadat')renderFadfadat();
 }
 
 function onFab(){
@@ -1111,7 +1325,12 @@ function renderDayCard(){
   const C=2*Math.PI*22;
   const off=C*(1-pct/100);
 
-  const permTasks=tasks.filter(t=>!t.date && (!doneMap[t.id] || doneMap[t.id]===td));
+  const permTasks=tasks.filter(t=>!t.date && !doneMap[t.id]);
+  const completedPermTasks=tasks.filter(t=>{
+    if (t.date || !doneMap[t.id]) return false;
+    const completionTime = typeof doneMap[t.id] === 'number' ? doneMap[t.id] : new Date(doneMap[t.id]).getTime();
+    return !isNaN(completionTime) && (Date.now() - completionTime < 24 * 60 * 60 * 1000);
+  });
 
   const todDay=new Date().getDay();
   const todayHabits=habits.filter(h=>h.days.includes(todDay));
@@ -1120,7 +1339,7 @@ function renderDayCard(){
     const cat=t.sub&&cats[t.sub]?cats[t.sub]:null;
     const isDone=!!doneMap[t.id];
     const tag=cat?'<span class="task-tag" style="background:'+cat.c+'22;color:'+cat.c+'">'+cat.n+'</span>':'';
-    return '<div class="task-item'+(isDone?' done':'')+'" onclick="togTask(\''+t.id+'\')">'+
+    return '<div class="task-item'+(isDone?' done':'')+'" data-id="'+t.id+'" onclick="togTask(\''+t.id+'\')">'+
       '<div class="chk" style="'+(isDone?'background:var(--success);border-color:var(--success);color:#fff':'border-color:'+(cat?cat.c:'var(--border2))'))+'">'+( isDone?'✓':'')+' </div>'+
       '<div class="task-txt">'+t.text+'</div>'+tag+
       '</div>';
@@ -1132,7 +1351,7 @@ function renderDayCard(){
     todayCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
       '<div class="dc-head"><div class="dc-title">مهام اليوم ✨</div>'+
       '<div class="prog-ring"><svg width="54" height="54" viewBox="0 0 54 54"><circle class="prg-bg" cx="27" cy="27" r="22"/><circle class="prg-fill" cx="27" cy="27" r="22" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="prg-num">'+pct+'%</div></div></div>'+
-      '<div class="tasks-list">'+listHtml+'</div></div>';
+      '<div class="tasks-list" id="todayTasksList">'+listHtml+'</div></div>';
   } else {
     todayCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
       '<div class="dc-head"><div class="dc-title">مهام اليوم ✨</div></div>'+
@@ -1144,7 +1363,15 @@ function renderDayCard(){
     const listHtml = permTasks.map(taskItem).join('');
     permCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
       '<div class="dc-head"><div class="dc-title">مهام مستمرة 💫</div></div>'+
-      '<div class="tasks-list">'+listHtml+'</div></div>';
+      '<div class="tasks-list" id="permTasksList">'+listHtml+'</div></div>';
+  }
+
+  let completedPermCardHtml = '';
+  if (completedPermTasks.length > 0) {
+    const listHtml = completedPermTasks.map(taskItem).join('');
+    completedPermCardHtml = '<div class="day-card" style="margin-bottom:24px">'+
+      '<div class="dc-head"><div class="dc-title">مهام منتهية ✅</div></div>'+
+      '<div class="tasks-list" id="completedTasksList">'+listHtml+'</div></div>';
   }
 
   let habitsCardHtml = '';
@@ -1157,7 +1384,7 @@ function renderDayCard(){
       const key=h.id+'_'+td;
       const isDone=!!hLog[key];
       const streak=calcStreak(h.id,h.days);
-      return '<div class="task-item'+(isDone?' done':'')+'" onclick="togHabitHome(\''+h.id+'\')">'+
+      return '<div class="task-item'+(isDone?' done':'')+'" data-id="'+h.id+'" onclick="togHabitHome(\''+h.id+'\')">'+
         '<div class="chk" style="'+(isDone?'background:'+h.color+';border-color:'+h.color:'border-color:'+h.color)+'">'+( isDone?'✓':'')+'</div>'+
         '<div class="task-txt">'+h.name+'</div>'+
         '<span style="font-size:.72rem;font-weight:800;padding:4px 10px;border-radius:20px;background:rgba(200,169,110,.1);color:var(--accent2);white-space:nowrap">🔥 '+streak+'</span>'+
@@ -1166,28 +1393,35 @@ function renderDayCard(){
     habitsCardHtml = '<div class="day-card">'+
       '<div class="dc-head"><div class="dc-title">عادات اليوم 🔁</div>'+
       '<div class="prog-ring"><svg width="54" height="54" viewBox="0 0 54 54"><circle class="prg-bg" cx="27" cy="27" r="22"/><circle class="prg-fill" cx="27" cy="27" r="22" stroke-dasharray="'+hC.toFixed(1)+'" stroke-dashoffset="'+hOff.toFixed(1)+'" style="stroke:var(--accent3)"/></svg><div class="prg-num" style="color:var(--accent3)">'+hPct+'%</div></div></div>'+
-      '<div class="tasks-list">'+listHtml+'</div></div>';
+      '<div class="tasks-list" id="todayHabitsList">'+listHtml+'</div></div>';
   }
 
-  if (total===0 && permTasks.length===0 && todayHabits.length===0) {
+  if (total===0 && permTasks.length===0 && completedPermTasks.length===0 && todayHabits.length===0) {
     ct.innerHTML='<div class="empty"><span class="empty-em">📭</span><div style="font-weight:700">لا توجد مهام حالية</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لإضافة مهمة جديدة</div></div>';
   } else {
-    ct.innerHTML=todayCardHtml+permCardHtml+habitsCardHtml;
+    ct.innerHTML=todayCardHtml+permCardHtml+completedPermCardHtml+habitsCardHtml;
+    if (typeof initSortablesHome === 'function') {
+      initSortablesHome();
+    }
   }
 }
 
 function togTask(id){
+  if (dragOccurred) return;
   if(doneMap[id]){
     delete doneMap[id];
     snd('click');
   } else {
-    doneMap[id] = today();
+    doneMap[id] = Date.now();
     snd('check');
     // تشغيل تأثير القلوب الاحتفالي
     triggerCelebration();
   }
   lsS('done', doneMap);
   renderDayCard();
+  if(typeof renderDoneTasks === 'function' && document.getElementById('at-done') && document.getElementById('at-done').style.display !== 'none') {
+    renderDoneTasks();
+  }
   scheduleSave();
 }
 
@@ -1310,28 +1544,75 @@ function saveNote(){
   const title=document.getElementById('nTitle').value.trim();
   const body=document.getElementById('nBody').value.trim();
   if(!body){toast('⚠ اكتبي محتوى الملاحظة');return;}
-  notes.unshift({id:Date.now(),title,body,color:noteColor,date:new Date().toLocaleDateString('ar-EG')});
+  const now = new Date();
+  const dayName = DAYS_AR[now.getDay()];
+  const datePart = now.toLocaleDateString('ar-EG', { year:'numeric', month:'long', day:'numeric' });
+  const timePart = now.toLocaleTimeString('ar-EG', { hour:'2-digit', minute:'2-digit', hour12: true });
+  const dateStr = `${dayName}، ${datePart} - ${timePart}`;
+  notes.unshift({id:Date.now(),title,body,color:noteColor,date:dateStr});
   lsS('notes',notes);close1('mAddNote');renderNotes();snd('ok');toast('✨ تم حفظ الملاحظة');scheduleSave();
 }
 
 function renderNotes(){
   const g=document.getElementById('notesGrid');
   if(!notes.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><span class="empty-em">📭</span><div style="font-weight:700">لا توجد ملاحظات بعد</div><div style="font-size:.82rem;margin-top:6px">اضغطي + لكتابة أول ملاحظة</div></div>';return;}
-  g.innerHTML=notes.map(n=>'<div class="note-card '+(n.color||'')+'" onclick="viewNote('+n.id+')">'+
-    (n.title?'<div class="nc-title">'+n.title+'</div>':'')+
-    '<div class="nc-body">'+n.body+'</div>'+
-    '<div class="nc-foot"><span class="nc-date">'+n.date+'</span>'+
-    '<button class="nc-del" onclick="delNote(event,'+n.id+')" title="حذف">🗑</button></div></div>').join('');
+  g.innerHTML=notes.map(n=>{
+    let displayDate = n.date || '';
+    const splitIdx = displayDate.indexOf(' · ✏️ تعديل');
+    if (splitIdx !== -1) {
+      displayDate = displayDate.substring(0, splitIdx);
+    }
+    return '<div class="note-card '+(n.color||'')+'" onclick="viewNote('+n.id+')">'+
+      (n.title?'<div class="nc-title">'+n.title+'</div>':'')+
+      '<div class="nc-body">'+n.body+'</div>'+
+      '<div class="nc-foot"><span class="nc-date">🕐 '+displayDate+'</span>'+
+      '<button class="nc-del" onclick="delNote(event,'+n.id+')" title="حذف">🗑</button></div></div>';
+  }).join('');
 }
 
 function viewNote(id){
   const n=notes.find(x=>x.id===id);if(!n)return;
   viewNId=id;
-  document.getElementById('vNTitle').textContent=n.title||'ملاحظة';
+  document.getElementById('vNTitle').textContent=n.title||'';
   document.getElementById('vNBody').textContent=n.body;
-  document.getElementById('vNDate').textContent='تاريخ الإضافة: '+n.date;
+  let displayDate = n.date || '';
+  const splitIdx = displayDate.indexOf(' · ✏️ تعديل');
+  if (splitIdx !== -1) {
+    displayDate = displayDate.substring(0, splitIdx);
+  }
+  document.getElementById('vNDate').textContent='📅 '+displayDate;
   document.getElementById('viewCard').className='modal '+(n.color||'');
   snd('open');document.getElementById('mViewNote').classList.add('open');
+}
+
+function updateNote(){
+  if(!viewNId) return;
+  const idx=notes.findIndex(n=>n.id===viewNId);
+  if(idx===-1) return;
+  const title=document.getElementById('vNTitle').textContent.trim();
+  const body=document.getElementById('vNBody').textContent.trim();
+  if(!body){toast('⚠ اكتبي محتوى الملاحظة');return;}
+  
+  // Keep original creation date and strip out any edit label if previously appended
+  let cleanDate = notes[idx]._origDate || notes[idx].date || '';
+  const splitIdx = cleanDate.indexOf(' · ✏️ تعديل');
+  if (splitIdx !== -1) {
+    cleanDate = cleanDate.substring(0, splitIdx);
+  }
+  
+  notes[idx]={...notes[idx],title,body,date:cleanDate};
+  if (notes[idx]._origDate) {
+    delete notes[idx]._origDate;
+  }
+  
+  const edited=notes.splice(idx,1)[0];
+  notes.unshift(edited);
+  lsS('notes',notes);
+  renderNotes();
+  close1('mViewNote');
+  snd('ok');
+  toast('✅ تم حفظ التعديلات');
+  scheduleSave();
 }
 
 function deleteViewNote(){
@@ -1372,7 +1653,7 @@ function renderHabits(){
     const key=h.id+'_'+td;
     const isDone=!!hLog[key];
     const streak=calcStreak(h.id,h.days);
-    return '<div class="habit-card"><div class="hc-head" onclick="togHabit(\''+h.id+'\')">'+
+    return '<div class="habit-card" data-id="'+h.id+'"><div class="hc-head" onclick="togHabit(\''+h.id+'\')">'+
       '<div class="h-dot" style="background:'+h.color+'"></div>'+
       '<div class="h-name">'+h.name+'</div>'+
       '<div class="h-streak">🔥 '+streak+' يوم</div>'+
@@ -1380,15 +1661,20 @@ function renderHabits(){
       '<button class="h-del" onclick="delHabit(event,'+h.id+')" title="حذف">✕</button>'+
       '</div></div>';
   }).join('');
+  if (typeof initSortablesHabits === 'function') {
+    initSortablesHabits();
+  }
 }
 
 function togHabit(id){
+  if (dragOccurred) return;
   const key=id+'_'+today();
   if(hLog[key]){delete hLog[key];snd('click');}else{hLog[key]=true;snd('check');}
   lsS('hLog',hLog);renderHabits();scheduleSave();
 }
 
 function togHabitHome(id){
+  if (dragOccurred) return;
   const key=id+'_'+today();
   if(hLog[key]){delete hLog[key];snd('click');}else{hLog[key]=true;snd('check');}
   lsS('hLog',hLog);renderDayCard();scheduleSave();
@@ -1460,12 +1746,13 @@ function openAdmin(){
 }
 
 function aTab(t){
-  ['add','manage','cats','reset'].forEach(x=>{
+  ['add','manage','cats','done','reset'].forEach(x=>{
     document.getElementById('at-'+x).style.display=x===t?'block':'none';
     document.getElementById('ab-'+x).classList.toggle('active',x===t);
   });
   if(t==='manage')renderAdminList();
   if(t==='cats')renderCats();
+  if(t==='done')renderDoneTasks();
 }
 
 function addCustomTask(){
@@ -1491,6 +1778,198 @@ function renderAdminList(){
 function delTask(id){
   if(!confirm('حذف هذه المهمة؟'))return;
   snd('del');tasks=tasks.filter(t=>t.id!==id);lsS('tasks',tasks);renderAdminList();renderDayCard();scheduleSave();
+}
+
+function renderDoneTasks(){
+  const w=document.getElementById('doneList');
+  const doneTasks = tasks.filter(t => !t.date && doneMap[t.id]);
+  if(!doneTasks.length){w.innerHTML='<div class="empty" style="padding:2rem">لا توجد مهام منتهية</div>';return;}
+  w.innerHTML=doneTasks.sort((a,b)=>{
+    const tA = typeof doneMap[a.id] === 'number' ? doneMap[a.id] : (doneMap[a.id] ? new Date(doneMap[a.id]).getTime() || 0 : 0);
+    const tB = typeof doneMap[b.id] === 'number' ? doneMap[b.id] : (doneMap[b.id] ? new Date(doneMap[b.id]).getTime() || 0 : 0);
+    return tB - tA;
+  }).map(t=>{
+    let dVal = doneMap[t.id];
+    let dStr = 'تاريخ الانتهاء غير معروف';
+    if(dVal) {
+      let dObj = new Date(dVal);
+      if(!isNaN(dObj.getTime())) {
+        dStr = dObj.toLocaleString('ar-EG');
+      }
+    }
+    return '<div style="display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--surface2);border-radius:16px;margin-bottom:9px">'+
+    '<div style="flex:1"><div style="font-weight:700;font-size:.9rem;text-decoration:line-through;opacity:0.7">'+t.text+'</div>'+
+    '<div style="font-size:.77rem;color:var(--muted);margin-top:3px">مكتملة: '+dStr+'</div></div>'+
+    '<button onclick="restoreDoneTask(\''+t.id+'\')" style="background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--success);border-radius:12px;padding:7px 13px;cursor:pointer;font-size:.82rem;font-weight:800;margin-left:5px">إرجاع</button>'+
+    '<button onclick="delDoneTask(\''+t.id+'\')" style="background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.3);color:var(--danger);border-radius:12px;padding:7px 13px;cursor:pointer;font-size:.82rem;font-weight:800">حذف</button>'+
+    '</div>';
+  }).join('');
+}
+
+function restoreDoneTask(id){
+  if(!confirm('إرجاع هذه المهمة لتصبح مستمرة؟'))return;
+  delete doneMap[id];
+  lsS('done',doneMap);
+  snd('click');
+  renderDoneTasks();
+  if(curPage==='tasks')renderDayCard();
+  scheduleSave();
+}
+
+function delDoneTask(id){
+  if(!confirm('حذف هذه المهمة نهائياً؟'))return;
+  snd('del');
+  tasks=tasks.filter(t=>t.id!==id);
+  delete doneMap[id];
+  lsS('tasks',tasks);
+  lsS('done',doneMap);
+  renderDoneTasks();
+  if(curPage==='tasks')renderDayCard();
+  scheduleSave();
+}
+
+// ═══════════════════════════════════════════════════════
+// DRAG AND DROP REORDERING (SortableJS Integration)
+// ═══════════════════════════════════════════════════════
+function initSortablesHome() {
+  if (typeof Sortable === 'undefined') return;
+  
+  const options = {
+    animation: 180,
+    ghostClass: 'sortable-ghost',
+    filter: '.chk, .h-del, .h-check, .nc-del, .task-tag',
+    preventOnFilter: false,
+    delay: 100,
+    delayOnTouchOnly: true
+  };
+
+  const todayList = document.getElementById('todayTasksList');
+  if (todayList) {
+    new Sortable(todayList, {
+      ...options,
+      onEnd: () => {
+        dragOccurred = true;
+        setTimeout(() => { dragOccurred = false; }, 50);
+        saveTaskOrder('todayTasksList');
+      }
+    });
+  }
+
+  const permList = document.getElementById('permTasksList');
+  if (permList) {
+    new Sortable(permList, {
+      ...options,
+      onEnd: () => {
+        dragOccurred = true;
+        setTimeout(() => { dragOccurred = false; }, 50);
+        saveTaskOrder('permTasksList');
+      }
+    });
+  }
+
+  const todayHabitsList = document.getElementById('todayHabitsList');
+  if (todayHabitsList) {
+    new Sortable(todayHabitsList, {
+      ...options,
+      onEnd: () => {
+        dragOccurred = true;
+        setTimeout(() => { dragOccurred = false; }, 50);
+        saveHabitOrderHome('todayHabitsList');
+      }
+    });
+  }
+}
+
+function initSortablesHabits() {
+  if (typeof Sortable === 'undefined') return;
+  
+  const habitsList = document.getElementById('habitsList');
+  if (habitsList) {
+    new Sortable(habitsList, {
+      animation: 180,
+      ghostClass: 'sortable-ghost',
+      filter: '.h-del, .h-check',
+      preventOnFilter: false,
+      delay: 100,
+      delayOnTouchOnly: true,
+      onEnd: () => {
+        dragOccurred = true;
+        setTimeout(() => { dragOccurred = false; }, 50);
+        saveHabitOrder('habitsList');
+      }
+    });
+  }
+}
+
+function saveTaskOrder(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const itemEls = container.querySelectorAll('.task-item');
+  const newIds = Array.from(itemEls).map(el => el.getAttribute('data-id'));
+  if (newIds.length === 0) return;
+
+  const taskMap = {};
+  tasks.forEach(t => { taskMap[t.id] = t; });
+
+  let newTasksList = [];
+  let newIdsIndex = 0;
+  for (let i = 0; i < tasks.length; i++) {
+    const t = tasks[i];
+    if (newIds.includes(t.id)) {
+      const nextId = newIds[newIdsIndex++];
+      if (taskMap[nextId]) {
+        newTasksList.push(taskMap[nextId]);
+      }
+    } else {
+      newTasksList.push(t);
+    }
+  }
+  tasks = newTasksList;
+  lsS('tasks', tasks);
+  scheduleSave();
+}
+
+function saveHabitOrderHome(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const itemEls = container.querySelectorAll('.task-item');
+  const newIds = Array.from(itemEls).map(el => el.getAttribute('data-id'));
+  if (newIds.length === 0) return;
+
+  const habitMap = {};
+  habits.forEach(h => { habitMap[h.id] = h; });
+
+  let newHabitsList = [];
+  let newIdsIndex = 0;
+  for (let i = 0; i < habits.length; i++) {
+    const h = habits[i];
+    if (newIds.includes(h.id + '')) {
+      const nextId = newIds[newIdsIndex++];
+      if (habitMap[nextId]) {
+        newHabitsList.push(habitMap[nextId]);
+      }
+    } else {
+      newHabitsList.push(h);
+    }
+  }
+  habits = newHabitsList;
+  lsS('habits', habits);
+  scheduleSave();
+}
+
+function saveHabitOrder(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const itemEls = container.querySelectorAll('.habit-card');
+  const newIds = Array.from(itemEls).map(el => el.getAttribute('data-id'));
+  if (newIds.length === 0) return;
+
+  const habitMap = {};
+  habits.forEach(h => { habitMap[h.id] = h; });
+
+  habits = newIds.map(id => habitMap[id]).filter(Boolean);
+  lsS('habits', habits);
+  scheduleSave();
 }
 
 function renderCats(){
@@ -1520,8 +1999,8 @@ function doReset(){
   if(!confirm('هل أنتِ متأكدة تماماً من مسح كل البيانات؟'))return;
   if(!confirm('تأكيد أخير: كل المهام والملاحظات والعادات والفئات ستُحذف نهائياً!'))return;
   snd('del');
-  ['cats','tasks','done','notes','habits','hLog','isLight'].forEach(k=>localStorage.removeItem(k));
-  cats={};tasks=[];doneMap={};notes=[];habits=[];hLog={};
+  ['cats','tasks','done','notes','habits','hLog','isLight','fadfadat'].forEach(k=>localStorage.removeItem(k));
+  cats={};tasks=[];doneMap={};notes=[];habits=[];hLog={};fadfadat=[];
   close1('mAdmin');
   saveToCloud();
   toast('✅ تم المسح. جارٍ الإعادة...');
@@ -1582,7 +2061,10 @@ function initApp(){
     // Skip login, load cloud in background
     document.getElementById('loginOverlay').classList.add('hide');
     setTimeout(()=>{ document.getElementById('loginOverlay').style.display='none'; },700);
-    loadFromCloud().then(()=>renderDayCard());
+    loadFromCloud().then(()=>{
+      renderDayCard();
+      setInterval(checkUpdatesFromCloud, 10000); // Check for updates every 10 seconds
+    });
     initApp();
   }
   // else: show login screen (already visible)
@@ -1929,6 +2411,138 @@ function showDiniTab(tab) {
     document.getElementById('dt-'+t).classList.toggle('active', t===tab);
   });
 }
+
+
+
+
+// ═══════════════════════════════════════════════════════
+// FADFADA — الفضفضة
+// ═══════════════════════════════════════════════════════
+let fadfadat = ls('fadfadat', []);
+
+let fadfadaRecorder = null;
+let fadfadaAudioChunks = [];
+let fadfadaIsRecording = false;
+
+function openFadfada() {
+  snd('open');
+  document.getElementById('fadfadaInput').value = '';
+  document.getElementById('fadfadaOverlay').classList.add('open');
+  document.getElementById('fadfadaOverlay').scrollTop = 0;
+}
+
+function closeFadfada() {
+  if (fadfadaIsRecording) stopFadfadaMic();
+  document.getElementById('fadfadaOverlay').classList.remove('open');
+}
+
+async function toggleFadfadaMic() {
+  if (fadfadaIsRecording) {
+    stopFadfadaMic();
+  } else {
+    await startFadfadaMic();
+  }
+}
+
+async function startFadfadaMic() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    fadfadaAudioChunks = [];
+    fadfadaRecorder = new MediaRecorder(stream);
+    fadfadaRecorder.ondataavailable = e => fadfadaAudioChunks.push(e.data);
+    fadfadaRecorder.onstop = () => {
+      const blob = new Blob(fadfadaAudioChunks, { type: 'audio/webm' });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const textarea = document.getElementById('fadfadaInput');
+        textarea.dataset.audio = reader.result;
+        textarea.placeholder = '✅ اتسجل الصوت! تقدري تكتبي كمان أو تضغطي خلصت مباشرة 🤍';
+      };
+      reader.readAsDataURL(blob);
+      stream.getTracks().forEach(t => t.stop());
+    };
+    fadfadaRecorder.start();
+    fadfadaIsRecording = true;
+    const btn = document.getElementById('fadfadaMicBtn');
+    btn.classList.add('recording');
+    document.getElementById('fadfadaMicTxt').textContent = 'جارٍ التسجيل... اضغطي للإيقاف ⏹';
+  } catch(e) {
+    toast('⚠️ مش قادر يوصل للمايك');
+  }
+}
+
+function stopFadfadaMic() {
+  if (fadfadaRecorder && fadfadaIsRecording) {
+    fadfadaRecorder.stop();
+    fadfadaIsRecording = false;
+    const btn = document.getElementById('fadfadaMicBtn');
+    btn.classList.remove('recording');
+    document.getElementById('fadfadaMicTxt').textContent = 'سجّلي صوتك';
+  }
+}
+
+function saveFadfada() {
+  const textarea = document.getElementById('fadfadaInput');
+  const text = textarea.value.trim();
+  const audio = textarea.dataset.audio || null;
+  if (!text && !audio) { closeFadfada(); return; }
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('ar-EG', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  const timeStr = now.toLocaleTimeString('ar-EG', { hour:'2-digit', minute:'2-digit' });
+  fadfadat.unshift({ id: Date.now()+'', text, audio, date: dateStr, time: timeStr });
+  lsS('fadfadat', fadfadat);
+  
+  // Sync to Cloud
+  hLog._fadfadat = fadfadat;
+  lsS('hLog', hLog);
+  
+  textarea.dataset.audio = '';
+  snd('ok');
+  closeFadfada();
+  toast('🤍 اتحفظ، وأنا هنا معاكِ دايماً');
+  scheduleSave();
+}
+
+function renderFadfadat() {
+  const el = document.getElementById('fadfadatList');
+  if (!el) return;
+  if (!fadfadat.length) {
+    el.innerHTML = '<div class="fadfada-empty"><div class="fe-ico">🤍</div><div style="font-weight:700;font-size:.95rem">لسه مفضفضتيش!</div><div style="font-size:.82rem;margin-top:6px;color:var(--muted)">لما تفضفضي هيتحفظ هنا</div></div>';
+    return;
+  }
+  el.innerHTML = fadfadat.map(f => `
+    <div class="fadfada-entry">
+      ${f.text ? `<div class="fadfada-entry-text">${f.text}</div>` : ''}
+      ${f.audio ? `<audio controls src="${f.audio}" style="width:100%;margin-top:.5rem;border-radius:12px;accent-color:var(--accent);"></audio>` : ''}
+      <div class="fadfada-entry-foot">
+        <span class="fadfada-entry-date">🕐 ${f.date} — ${f.time}</span>
+        <button class="fadfada-del-btn" onclick="deleteFadfada('${f.id}')">🗑 حذف</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function deleteFadfada(id) {
+  if (!confirm('تحذفي الفضفضة دي؟')) return;
+  fadfadat = fadfadat.filter(f => f.id !== id);
+  lsS('fadfadat', fadfadat);
+  
+  // Sync to Cloud
+  hLog._fadfadat = fadfadat;
+  lsS('hLog', hLog);
+  
+  snd('del');
+  renderFadfadat();
+  scheduleSave();
+}
+
+
+
+
+
+
+
+
 
 
 
