@@ -1418,6 +1418,26 @@ window.addEventListener('offline', () => {
   setSyncDot('error');
 });
 
+// Client-side deterrents for casual inspection.
+// This cannot fully stop browser devtools, but it blocks the common shortcuts and menu.
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+});
+
+document.addEventListener('keydown', (e) => {
+  const key = (e.key || '').toLowerCase();
+  const modKey = e.ctrlKey || e.metaKey;
+  const blocked =
+    key === 'f12' ||
+    (modKey && e.shiftKey && ['i', 'j', 'c'].includes(key)) ||
+    (modKey && key === 'u');
+
+  if (blocked) {
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);
+
 // ═══════════════════════════════════════════════════════
 // CONTENT FROM content.js
 // ═══════════════════════════════════════════════════════
