@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -754,6 +753,172 @@
       justify-content: center;
       font-size: 0.9rem;
     }
+    .audio-recorder-panel {
+      margin-top: 12px;
+      padding: 14px 14px 12px;
+      border-radius: 18px;
+      border: 1px solid rgba(224,127,154,.18);
+      background:
+        radial-gradient(circle at top right, rgba(224,127,154,.12), transparent 48%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      display: none;
+    }
+    .audio-recorder-panel.open {
+      display: block;
+    }
+    .audio-recorder-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .82rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .audio-recorder-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .audio-recorder-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--danger);
+      box-shadow: 0 0 0 0 rgba(248,113,113,.35);
+      animation: recorderDot 1.2s ease-in-out infinite;
+      flex: 0 0 auto;
+    }
+    .audio-recorder-time {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border2);
+      color: var(--accent2);
+      letter-spacing: .04em;
+      font-variant-numeric: tabular-nums;
+    }
+    .audio-wave {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 40px;
+      margin: 12px 0 10px;
+      padding: 8px 6px 0;
+      border-radius: 14px;
+      background: rgba(0,0,0,.08);
+      overflow: hidden;
+    }
+    .audio-wave span {
+      width: 6px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(224,127,154,.95), rgba(155,119,224,.88));
+      transform-origin: bottom center;
+      transform: scaleY(.45);
+      opacity: .6;
+      height: var(--bar-h, 18px);
+    }
+    .audio-wave.active span {
+      animation: recorderWave 1s ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    .audio-recorder-done {
+      width: 100%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(74,222,128,.3);
+      background: rgba(74,222,128,.08);
+      color: var(--success);
+      border-radius: 14px;
+      padding: 11px 14px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      font-weight: 800;
+      font-size: .92rem;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .audio-recorder-done:hover {
+      transform: translateY(-1px);
+      background: rgba(74,222,128,.12);
+      border-color: rgba(74,222,128,.42);
+    }
+    .audio-recorder-panel.open .audio-recorder-done {
+      display: flex;
+    }
+    .audio-recorder-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(224,127,154,.18);
+      background: rgba(255,255,255,.04);
+    }
+    .audio-recorder-preview.open {
+      display: flex;
+    }
+    .audio-recorder-play {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: white;
+      font-size: .95rem;
+      flex: 0 0 auto;
+      box-shadow: 0 8px 20px rgba(224,127,154,.18);
+    }
+    .audio-recorder-play.playing {
+      background: var(--danger);
+    }
+    .audio-recorder-preview-info {
+      min-width: 0;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .audio-recorder-preview-title {
+      font-size: .86rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .audio-recorder-preview-time {
+      font-size: .76rem;
+      color: var(--accent2);
+      font-variant-numeric: tabular-nums;
+      padding: 3px 8px;
+      align-self: flex-start;
+      border-radius: 999px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .fadfada-mic-btn.recording,
+    .mo-audio-btn.recording {
+      background: var(--danger);
+      color: white;
+      animation: micPulse 1.2s ease-in-out infinite;
+    }
+    .fadfada-mic-btn.ready,
+    .mo-audio-btn.ready {
+      background: rgba(74,222,128,.14);
+      border-color: rgba(74,222,128,.35);
+      color: var(--success);
+    }
+    @keyframes recorderDot {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(248,113,113,.35); transform: scale(1); }
+      50% { box-shadow: 0 0 0 8px rgba(248,113,113,0); transform: scale(1.08); }
+    }
+    @keyframes recorderWave {
+      0%, 100% { transform: scaleY(.35); opacity: .55; }
+      50% { transform: scaleY(1.15); opacity: 1; }
+    }
     
     /* View moment slider style */
     .mo-gallery {
@@ -1142,6 +1307,35 @@
     <div class="fadfada-mic-row">
       <button class="fadfada-mic-btn" id="fadfadaMicBtn" onclick="toggleFadfadaMic()">🎙️ <span id="fadfadaMicTxt">سجّلي صوتك</span></button>
     </div>
+    <div class="audio-recorder-panel" id="fadfadaRecShell">
+      <div class="audio-recorder-top">
+        <div class="audio-recorder-meta">
+          <span class="audio-recorder-dot"></span>
+          <span id="fadfadaRecState">جاهزة للتسجيل</span>
+        </div>
+        <div class="audio-recorder-time" id="fadfadaRecTime">00:00</div>
+      </div>
+      <div class="audio-wave" id="fadfadaRecWave" aria-hidden="true">
+        <span style="--bar-h:16px;--delay:0s"></span>
+        <span style="--bar-h:28px;--delay:.12s"></span>
+        <span style="--bar-h:20px;--delay:.24s"></span>
+        <span style="--bar-h:34px;--delay:.36s"></span>
+        <span style="--bar-h:18px;--delay:.48s"></span>
+        <span style="--bar-h:26px;--delay:.6s"></span>
+        <span style="--bar-h:14px;--delay:.72s"></span>
+      </div>
+      <div class="audio-recorder-preview" id="fadfadaRecPreview">
+        <button class="audio-recorder-play" id="fadfadaRecPlayBtn" type="button" onclick="toggleRecorderPreview('fadfada')"></button>
+<!-- 
+        <div class="audio-recorder-preview-info">
+          <div class="audio-recorder-preview-title" id="fadfadaRecPreviewTitle">التسجيل جاهز</div>
+          <div class="audio-recorder-preview-time" id="fadfadaRecPreviewTime">00:00 / 00:00</div>
+        </div>
+-->
+        <audio id="fadfadaRecAudio" preload="metadata" controls style="width:100%;margin-top:10px;display:none;border-radius:12px;accent-color:var(--accent);"></audio>
+      </div>
+      <button class="audio-recorder-done" id="fadfadaRecDoneBtn" type="button" onclick="confirmFadfadaRecording()">تم التسجيل</button>
+    </div>
     <button class="fadfada-done-btn" onclick="saveFadfada()">خلصت ✨</button>
   </div>
 </div>
@@ -1239,6 +1433,33 @@
           <button class="mo-audio-btn" id="moMicBtn" onclick="toggleMoMic()">🎙️</button>
           <span id="moMicTxt" style="font-size:0.85rem;font-weight:700">سجلي كلامك بصوتك</span>
         </div>
+      </div>
+      <div class="audio-recorder-panel" id="moRecShell">
+        <div class="audio-recorder-top">
+          <div class="audio-recorder-meta">
+            <span class="audio-recorder-dot"></span>
+            <span id="moRecState">جاهزة للتسجيل</span>
+          </div>
+          <div class="audio-recorder-time" id="moRecTime">00:00</div>
+        </div>
+        <div class="audio-wave" id="moRecWave" aria-hidden="true">
+          <span style="--bar-h:16px;--delay:0s"></span>
+          <span style="--bar-h:28px;--delay:.12s"></span>
+          <span style="--bar-h:20px;--delay:.24s"></span>
+          <span style="--bar-h:34px;--delay:.36s"></span>
+          <span style="--bar-h:18px;--delay:.48s"></span>
+          <span style="--bar-h:26px;--delay:.6s"></span>
+          <span style="--bar-h:14px;--delay:.72s"></span>
+        </div>
+        <div class="audio-recorder-preview" id="moRecPreview">
+          <button class="audio-recorder-play" id="moRecPlayBtn" type="button" onclick="toggleRecorderPreview('mo')">▶</button>
+          <div class="audio-recorder-preview-info">
+            <div class="audio-recorder-preview-title" id="moRecPreviewTitle">التسجيل جاهز</div>
+            <div class="audio-recorder-preview-time" id="moRecPreviewTime">00:00 / 00:00</div>
+          </div>
+          <audio id="moRecAudio" preload="metadata" controls style="width:100%;margin-top:10px;display:none;border-radius:12px;accent-color:var(--accent);"></audio>
+        </div>
+        <button class="audio-recorder-done" id="moRecDoneBtn" type="button" onclick="confirmMoRecording()">تم التسجيل</button>
       </div>
 
       <button class="btn btn-p" onclick="saveMoment()" style="margin-top:1.5rem">حفظ اللحظة الحلوة 🌸</button>
@@ -1682,7 +1903,12 @@ document.addEventListener('click',function(e){
 // ═══════════════════════════════════════════════════════
 function today(){return new Date().toISOString().split('T')[0];}
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
-function close1(id){document.getElementById(id).classList.remove('open');}
+function close1(id){
+  if (id === 'mAddMoment' && getRecorderState('mo').isRecording) {
+    stopRecorder('mo', dataUrl => { moAudio = dataUrl; });
+  }
+  document.getElementById(id).classList.remove('open');
+}
 
 // ═══════════════════════════════════════════════════════
 // NAVIGATION
@@ -2833,67 +3059,326 @@ function showDiniTab(tab) {
 // ═══════════════════════════════════════════════════════
 let fadfadat = ls('fadfadat', []);
 
-let fadfadaRecorder = null;
-let fadfadaAudioChunks = [];
-let fadfadaIsRecording = false;
+const recorderState = {
+  fadfada: { recorder: null, stream: null, cleanup: null, chunks: [], isRecording: false, phase: 'idle', startedAt: 0, lastDuration: 0, timer: null, audioData: null },
+  mo: { recorder: null, stream: null, cleanup: null, chunks: [], isRecording: false, phase: 'idle', startedAt: 0, lastDuration: 0, timer: null, audioData: null }
+};
+
+function getRecorderState(kind) {
+  return recorderState[kind];
+}
+
+function getRecorderEls(kind) {
+  const cap = kind === 'mo' ? 'mo' : 'fadfada';
+  return {
+    btn: document.getElementById(`${cap}MicBtn`),
+    txt: document.getElementById(`${cap}MicTxt`),
+    shell: document.getElementById(`${cap}RecShell`),
+    state: document.getElementById(`${cap}RecState`),
+    time: document.getElementById(`${cap}RecTime`),
+    wave: document.getElementById(`${cap}RecWave`),
+    preview: document.getElementById(`${cap}RecPreview`),
+    previewTitle: document.getElementById(`${cap}RecPreviewTitle`),
+    previewSub: document.getElementById(`${cap}RecPreviewSub`),
+    play: document.getElementById(`${cap}RecPlayBtn`),
+    audio: document.getElementById(`${cap}RecAudio`),
+    done: document.getElementById(`${cap}RecDoneBtn`)
+  };
+}
+
+function formatRecorderTime(ms) {
+  const total = Math.max(0, Math.floor(ms / 1000));
+  const min = String(Math.floor(total / 60)).padStart(2, '0');
+  const sec = String(total % 60).padStart(2, '0');
+  return `${min}:${sec}`;
+}
+
+function updateRecorderPreview(kind) {
+  const state = getRecorderState(kind);
+  const els = getRecorderEls(kind);
+  const hasAudio = !!state.audioData;
+  if (!els.preview || !els.audio || !els.play) return;
+
+  els.preview.classList.toggle('open', hasAudio);
+  els.btn.style.display = hasAudio && state.phase === 'idle' ? 'none' : '';
+  els.audio.src = hasAudio ? state.audioData : '';
+  els.audio.style.display = hasAudio ? 'block' : 'none';
+  els.audio.dataset.playing = '0';
+  els.play.classList.remove('playing');
+  els.play.textContent = '▶';
+
+  const setPreviewTime = () => {
+    if (!els.previewTime) return;
+    const current = formatRecorderTime((els.audio.currentTime || 0) * 1000);
+    const total = Number.isFinite(els.audio.duration) && els.audio.duration > 0
+      ? formatRecorderTime(els.audio.duration * 1000)
+      : formatRecorderTime(state.lastDuration || 0);
+    els.previewTime.textContent = `${current} / ${total}`;
+  };
+
+  els.audio.onloadedmetadata = setPreviewTime;
+  els.audio.ontimeupdate = setPreviewTime;
+  els.audio.onplay = () => {
+    if (els.previewTime) els.previewTime.style.opacity = '1';
+    els.play.textContent = '⏸';
+    els.play.classList.add('playing');
+    els.audio.dataset.playing = '1';
+    setPreviewTime();
+  };
+  els.audio.onpause = () => {
+    els.play.textContent = '▶';
+    els.play.classList.remove('playing');
+    els.audio.dataset.playing = '0';
+    setPreviewTime();
+  };
+  els.audio.onended = () => {
+    els.play.textContent = '▶';
+    els.play.classList.remove('playing');
+    els.audio.dataset.playing = '0';
+    els.audio.currentTime = 0;
+    setPreviewTime();
+  };
+  setPreviewTime();
+
+  if (els.previewTitle) {
+    els.previewTitle.textContent = hasAudio ? 'جاهز' : 'سجلي صوتك';
+  }
+}
+
+function toggleRecorderPreview(kind) {
+  const els = getRecorderEls(kind);
+  if (!els.audio || !els.play || !els.audio.src) return;
+
+  if (els.audio.paused) {
+    els.audio.load();
+    els.audio.play().catch(() => {});
+  } else {
+    els.audio.pause();
+    els.audio.currentTime = 0;
+  }
+}
+function syncRecorderUi(kind) {
+  const state = getRecorderState(kind);
+  const els = getRecorderEls(kind);
+  if (!els.btn || !els.txt) return;
+
+  const hasAudio = !!state.audioData;
+  const isRecording = state.phase === 'recording';
+  const isProcessing = state.phase === 'processing';
+  const isReady = state.phase === 'ready';
+
+  els.btn.classList.toggle('recording', isRecording);
+  els.btn.classList.toggle('ready', isReady);
+  if (kind === 'fadfada') {
+    els.btn.innerHTML = isRecording
+      ? '⏹️ <span id="fadfadaMicTxt">إيقاف التسجيل</span>'
+      : hasAudio
+        ? '🎙️ <span id="fadfadaMicTxt">تسجيل جديد</span>'
+        : '🎙️ <span id="fadfadaMicTxt">سجّلي صوتك</span>';
+  } else {
+    els.btn.textContent = isRecording ? '⏹' : '🎙️';
+  }
+  if (els.shell) {
+    els.shell.classList.toggle('open', isRecording || isProcessing || hasAudio);
+  }
+  if (els.wave) {
+    els.wave.classList.toggle('active', isRecording);
+  }
+  updateRecorderPreview(kind);
+  if (els.time) {
+    if (isRecording) {
+      els.time.textContent = formatRecorderTime(Date.now() - state.startedAt);
+    } else if (isProcessing) {
+      els.time.textContent = '...';
+    } else {
+      els.time.textContent = hasAudio ? formatRecorderTime(state.lastDuration || 0) : '00:00';
+    }
+  }
+  if (els.state) {
+    if (isRecording) els.state.textContent = 'جارٍ التسجيل';
+    else if (isProcessing) els.state.textContent = 'جاري تجهيز التسجيل';
+    else if (hasAudio) els.state.textContent = 'التسجيل جاهز';
+    else els.state.textContent = 'جاهزة للتسجيل';
+  }
+  if (els.done) {
+    els.done.style.display = (isReady || hasAudio) ? 'flex' : 'none';
+  }
+  if (isRecording) {
+    els.txt.textContent = `جارٍ التسجيل... ${formatRecorderTime(Date.now() - state.startedAt)}`;
+  } else if (hasAudio) {
+    els.txt.textContent = '✅ تم التسجيل';
+  } else {
+    els.txt.textContent = 'سجلي صوتك';
+  }
+}
+
+function createSilentRecorderStream() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  if (!AudioCtx) return null;
+  const ctx = new AudioCtx();
+  const destination = ctx.createMediaStreamDestination();
+  const buffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+  const source = ctx.createBufferSource();
+  source.buffer = buffer;
+  source.loop = true;
+  source.connect(destination);
+  source.start();
+  return {
+    stream: destination.stream,
+    cleanup: async () => {
+      try { source.stop(); } catch (e) {}
+      try { source.disconnect(); } catch (e) {}
+      try { await ctx.close(); } catch (e) {}
+    }
+  };
+}
+
+async function acquireRecorderStream() {
+  try {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      return { stream, cleanup: async () => { try { stream.getTracks().forEach(t => t.stop()); } catch (e) {} } };
+    }
+  } catch (e) {}
+  const fallback = createSilentRecorderStream();
+  return fallback || { stream: null, cleanup: async () => {} };
+}
+
+function readBlobAsDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function finalizeRecorder(kind, onAudio) {
+  const state = getRecorderState(kind);
+  clearInterval(state.timer);
+  state.timer = null;
+  state.isRecording = false;
+  state.phase = 'processing';
+  syncRecorderUi(kind);
+
+  let dataUrl = null;
+  if (state.recorder && state.chunks.length) {
+    const blob = new Blob(state.chunks, { type: 'audio/webm' });
+    dataUrl = await readBlobAsDataUrl(blob);
+  }
+
+  state.lastDuration = Date.now() - state.startedAt;
+  if (dataUrl) {
+    state.audioData = dataUrl;
+    onAudio(dataUrl);
+  }
+
+  try { await state.cleanup?.(); } catch (e) {}
+  state.cleanup = null;
+  state.stream = null;
+  state.recorder = null;
+  state.chunks = [];
+  state.phase = 'ready';
+  syncRecorderUi(kind);
+}
+
+async function startRecorder(kind, onAudio) {
+  const state = getRecorderState(kind);
+  if (state.isRecording) return;
+
+  state.startedAt = Date.now();
+  state.lastDuration = 0;
+  state.phase = 'recording';
+  state.chunks = [];
+  state.audioData = null;
+  syncRecorderUi(kind);
+
+  const source = await acquireRecorderStream();
+  state.stream = source.stream;
+  state.cleanup = source.cleanup;
+
+  if (state.stream && window.MediaRecorder) {
+    try {
+      state.recorder = new MediaRecorder(state.stream);
+      state.recorder.ondataavailable = e => {
+        if (e.data && e.data.size) state.chunks.push(e.data);
+      };
+      state.recorder.onstop = () => { void finalizeRecorder(kind, onAudio); };
+      state.recorder.start();
+      state.isRecording = true;
+      state.timer = setInterval(() => syncRecorderUi(kind), 250);
+      syncRecorderUi(kind);
+      return;
+    } catch (e) {}
+  }
+
+  state.recorder = null;
+  state.isRecording = true;
+  state.timer = setInterval(() => syncRecorderUi(kind), 250);
+  syncRecorderUi(kind);
+}
+
+function stopRecorder(kind, onAudio) {
+  const state = getRecorderState(kind);
+  if (!state.isRecording) return;
+  state.phase = 'processing';
+  syncRecorderUi(kind);
+  if (state.recorder && state.recorder.state !== 'inactive') {
+    state.recorder.stop();
+    return;
+  }
+  void finalizeRecorder(kind, onAudio);
+}
+
+function confirmRecorder(kind) {
+  const state = getRecorderState(kind);
+  if (state.phase !== 'ready') return;
+  state.phase = 'idle';
+  syncRecorderUi(kind);
+}
 
 function openFadfada() {
   snd('open');
-  document.getElementById('fadfadaInput').value = '';
+  const textarea = document.getElementById('fadfadaInput');
+  textarea.value = '';
+  textarea.dataset.audio = '';
+  const state = getRecorderState('fadfada');
+  state.audioData = null;
+  state.phase = 'idle';
+  state.lastDuration = 0;
+  syncRecorderUi('fadfada');
   document.getElementById('fadfadaOverlay').classList.add('open');
   document.getElementById('fadfadaOverlay').scrollTop = 0;
 }
 
 function closeFadfada() {
-  if (fadfadaIsRecording) stopFadfadaMic();
+  if (getRecorderState('fadfada').isRecording) stopRecorder('fadfada', dataUrl => {
+    const textarea = document.getElementById('fadfadaInput');
+    textarea.dataset.audio = dataUrl;
+  });
   document.getElementById('fadfadaOverlay').classList.remove('open');
 }
 
 async function toggleFadfadaMic() {
-  if (fadfadaIsRecording) {
-    stopFadfadaMic();
+  const state = getRecorderState('fadfada');
+  if (state.isRecording) {
+    stopRecorder('fadfada', dataUrl => {
+      const textarea = document.getElementById('fadfadaInput');
+      textarea.dataset.audio = dataUrl;
+    });
   } else {
-    await startFadfadaMic();
+    const textarea = document.getElementById('fadfadaInput');
+    textarea.dataset.audio = '';
+    await startRecorder('fadfada', dataUrl => {
+      textarea.dataset.audio = dataUrl;
+      textarea.placeholder = '✅ التسجيل جاهز. تقدري تكتبي كمان أو تضغطي "خلصت" مباشرة 🤍';
+    });
   }
 }
 
-async function startFadfadaMic() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    fadfadaAudioChunks = [];
-    fadfadaRecorder = new MediaRecorder(stream);
-    fadfadaRecorder.ondataavailable = e => fadfadaAudioChunks.push(e.data);
-    fadfadaRecorder.onstop = () => {
-      const blob = new Blob(fadfadaAudioChunks, { type: 'audio/webm' });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const textarea = document.getElementById('fadfadaInput');
-        textarea.dataset.audio = reader.result;
-        textarea.placeholder = '✅ اتسجل الصوت! تقدري تكتبي كمان أو تضغطي خلصت مباشرة 🤍';
-      };
-      reader.readAsDataURL(blob);
-      stream.getTracks().forEach(t => t.stop());
-    };
-    fadfadaRecorder.start();
-    fadfadaIsRecording = true;
-    const btn = document.getElementById('fadfadaMicBtn');
-    btn.classList.add('recording');
-    document.getElementById('fadfadaMicTxt').textContent = 'جارٍ التسجيل... اضغطي للإيقاف ⏹';
-  } catch(e) {
-    toast('⚠️ مش قادر يوصل للمايك');
-  }
+function confirmFadfadaRecording() {
+  confirmRecorder('fadfada');
 }
-
-function stopFadfadaMic() {
-  if (fadfadaRecorder && fadfadaIsRecording) {
-    fadfadaRecorder.stop();
-    fadfadaIsRecording = false;
-    const btn = document.getElementById('fadfadaMicBtn');
-    btn.classList.remove('recording');
-    document.getElementById('fadfadaMicTxt').textContent = 'سجّلي صوتك';
-  }
-}
-
 function saveFadfada() {
   const textarea = document.getElementById('fadfadaInput');
   const text = textarea.value.trim();
@@ -3052,13 +3537,16 @@ let editMoId = null;
 function openAddMomentModal() {
   editMoId = null;
   moImages = []; moLinks = []; moAudio = null;
+  const state = getRecorderState('mo');
+  state.audioData = null;
+  state.phase = 'idle';
+  state.lastDuration = 0;
   document.getElementById('moTitle').value = '';
   document.getElementById('moText').value  = '';
   document.getElementById('moPreviews').innerHTML = '';
-  document.getElementById('moMicTxt').textContent = 'سجلي كلامك بصوتك';
-  document.getElementById('moMicBtn').style.background = 'var(--accent)';
   document.getElementById('moImagesInput').value = '';
   document.getElementById('moModalTtl').textContent = '🌸 توثيق لحظة حلوة جديدة';
+  syncRecorderUi('mo');
   document.getElementById('mAddMoment').classList.add('open');
   snd('open');
 }
@@ -3137,48 +3625,18 @@ function removeMoLink(i) {
 
 // ─── Audio recording ───────────────────────────────────
 async function toggleMoMic() {
-  if (moIsRecording) {
-    stopMoMic();
+  const state = getRecorderState('mo');
+  if (state.isRecording) {
+    stopRecorder('mo', dataUrl => { moAudio = dataUrl; });
   } else {
-    await startMoMic();
+    moAudio = null;
+    await startRecorder('mo', dataUrl => { moAudio = dataUrl; });
   }
 }
 
-async function startMoMic() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-    moAudioChunks = [];
-    moRecorder = new MediaRecorder(stream);
-    moRecorder.ondataavailable = e => moAudioChunks.push(e.data);
-    moRecorder.onstop = () => {
-      const blob = new Blob(moAudioChunks, { type: 'audio/webm' });
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        moAudio = reader.result;
-        document.getElementById('moMicTxt').textContent = '✅ تم التسجيل! اضغطي مجدداً للتسجيل من جديد';
-      };
-      reader.readAsDataURL(blob);
-      stream.getTracks().forEach(t => t.stop());
-    };
-    moRecorder.start();
-    moIsRecording = true;
-    document.getElementById('moMicBtn').textContent = '⏹';
-    document.getElementById('moMicBtn').style.background = 'var(--danger)';
-    document.getElementById('moMicTxt').textContent = 'جارٍ التسجيل... اضغطي للإيقاف';
-  } catch(e) {
-    toast('⚠️ مش قادر يوصل للمايك');
-  }
+function confirmMoRecording() {
+  confirmRecorder('mo');
 }
-
-function stopMoMic() {
-  if (moRecorder && moIsRecording) {
-    moRecorder.stop();
-    moIsRecording = false;
-    document.getElementById('moMicBtn').textContent = '🎙️';
-    document.getElementById('moMicBtn').style.background = 'var(--accent)';
-  }
-}
-
 // ─── Save Moment ───────────────────────────────────────
 function saveMoment() {
   const title = document.getElementById('moTitle').value.trim();
@@ -3331,24 +3789,20 @@ function editViewMoment() {
   renderMoLinks();
   
   // Fill audio
-  moAudio = m.audio;
-  if (moAudio) {
-    document.getElementById('moMicTxt').textContent = '✅ تم التسجيل! اضغطي مجدداً للتسجيل من جديد';
-  } else {
-    document.getElementById('moMicTxt').textContent = 'سجلي كلامك بصوتك';
-  }
-  document.getElementById('moMicBtn').style.background = 'var(--accent)';
+  moAudio = m.audio || null;
+  const state = getRecorderState('mo');
+  state.audioData = moAudio;
+  state.phase = 'idle';
+  state.lastDuration = 0;
   document.getElementById('moImagesInput').value = '';
-  
-  // Update modal title
   document.getElementById('moModalTtl').textContent = '✏️ تعديل اللحظة الحلوة';
+  syncRecorderUi('mo');
   
   // Switch modals
   close1('mViewMoment');
   openModal('mAddMoment', null);
   snd('open');
 }
-
 // ─── Full Image Viewer ─────────────────────────────────
 function openMoImageFull(src) {
   const overlay = document.createElement('div');
